@@ -1,11 +1,91 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Prefabs/Block.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 
 [node name="root" type="Node" index="0"]
 
-[node name="Level Name" type="Label" parent="." index="0"]
+[node name="Position2D" type="Position2D" parent="." index="0"]
+
+editor/display_folded = true
+z_index = -1
+_sections_unfolded = [ "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="StaticBody2D" parent="Position2D" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 173.426, 630.191 )
+scale = Vector2( 13.4513, 8.84827 )
+z_index = -1
+
+[node name="StaticBody2D2" parent="Position2D" index="1" instance=ExtResource( 1 )]
+
+position = Vector2( 500.741, 596.88 )
+scale = Vector2( 13.4513, 8.84827 )
+z_index = -1
+
+[node name="StaticBody2D6" parent="Position2D" index="2" instance=ExtResource( 1 )]
+
+position = Vector2( 1046.25, 593.865 )
+rotation = -0.523599
+scale = Vector2( 10, 10 )
+z_index = -1
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D3" parent="Position2D" index="3" instance=ExtResource( 1 )]
+
+position = Vector2( 848.617, 637.578 )
+scale = Vector2( 13.4513, 8.84827 )
+z_index = -1
+
+[node name="StaticBody2D5" parent="Position2D" index="4" instance=ExtResource( 1 )]
+
+position = Vector2( -27.7677, 265.343 )
+scale = Vector2( 2.65587, 17.4652 )
+z_index = -1
+
+[node name="StaticBody2D9" parent="Position2D" index="5" instance=ExtResource( 1 )]
+
+position = Vector2( 1062.5, 198.727 )
+scale = Vector2( 2.65587, 14.4074 )
+z_index = -1
+
+[node name="StaticBody2D8" parent="Position2D" index="6" instance=ExtResource( 1 )]
+
+position = Vector2( 511.741, -39.4122 )
+rotation = 1.5708
+scale = Vector2( 2.65587, 35.5129 )
+z_index = -1
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D7" parent="Position2D" index="7" instance=ExtResource( 1 )]
+
+position = Vector2( 171.288, 247.789 )
+scale = Vector2( 3.35138, 6.16986 )
+z_index = -1
+
+[node name="StaticBody2D10" parent="Position2D" index="8" instance=ExtResource( 1 )]
+
+position = Vector2( 400.523, 294.178 )
+scale = Vector2( 4.26496, 1.02573 )
+z_index = -1
+
+[node name="StaticBody2D11" parent="Position2D" index="9" instance=ExtResource( 1 )]
+
+position = Vector2( 609.852, 167.929 )
+scale = Vector2( 4.26496, 1.02573 )
+z_index = -1
+
+[node name="StaticBody2D12" parent="Position2D" index="10" instance=ExtResource( 1 )]
+
+position = Vector2( 895.02, 95.5762 )
+scale = Vector2( 9.83204, 1.02573 )
+z_index = -1
+
+[node name="Level Name" type="Label" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -27,54 +107,8 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect" ]
 
-[node name="Player" parent="." index="1" instance=ExtResource( 1 )]
+[node name="Player" parent="." index="2" instance=ExtResource( 2 )]
 
-position = Vector2( 478.196, 327.01 )
-
-[node name="Ground" type="Node" parent="." index="2"]
-
-[node name="StaticBody2D" parent="Ground" index="0" instance=ExtResource( 2 )]
-
-position = Vector2( 173.426, 630.191 )
-scale = Vector2( 13.4513, 8.84827 )
-
-[node name="StaticBody2D2" parent="Ground" index="1" instance=ExtResource( 2 )]
-
-position = Vector2( 500.741, 596.88 )
-scale = Vector2( 13.4513, 8.84827 )
-
-[node name="StaticBody2D6" parent="Ground" index="2" instance=ExtResource( 2 )]
-
-position = Vector2( 1046.25, 593.865 )
-rotation = -0.523599
-scale = Vector2( 10, 10 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="StaticBody2D3" parent="Ground" index="3" instance=ExtResource( 2 )]
-
-position = Vector2( 848.617, 637.578 )
-scale = Vector2( 13.4513, 8.84827 )
-
-[node name="StaticBody2D5" parent="Ground" index="4" instance=ExtResource( 2 )]
-
-position = Vector2( -27.7677, 265.343 )
-scale = Vector2( 2.65587, 17.4652 )
-
-[node name="StaticBody2D9" parent="Ground" index="5" instance=ExtResource( 2 )]
-
-position = Vector2( 1060.65, 198.727 )
-scale = Vector2( 2.65587, 14.4074 )
-
-[node name="StaticBody2D8" parent="Ground" index="6" instance=ExtResource( 2 )]
-
-position = Vector2( 511.741, -39.4122 )
-rotation = 1.5708
-scale = Vector2( 2.65587, 35.5129 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="StaticBody2D7" parent="Ground" index="7" instance=ExtResource( 2 )]
-
-position = Vector2( 171.288, 247.789 )
-scale = Vector2( 3.35138, 6.16986 )
+position = Vector2( 172.924, 427.333 )
 
 

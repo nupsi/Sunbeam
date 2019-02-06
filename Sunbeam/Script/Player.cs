@@ -14,15 +14,13 @@ public class Player : KinematicBody2D
     {
         //Force scale to 1.
         SetScale(Vector2.One);
-        m_velocity = new Vector2(0, Gravity);
+        m_velocity = new Vector2(0, 0);
         m_sprite = (Sprite)GetNode("Sprite");
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        UpdateInput();
         m_velocity.y += Gravity * delta;
-
         if(IsOnFloor())
         {
             m_previousDirection = Direction.None;
@@ -32,6 +30,7 @@ public class Player : KinematicBody2D
             }
         }
 
+        UpdateInput();
         m_velocity = MoveAndSlide(m_velocity, new Vector2(0, -1), floorMaxAngle: 0.85f);
     }
 
@@ -78,7 +77,7 @@ public class Player : KinematicBody2D
                 ? Direction.Left
                 : Direction.Right;
 
-        if(direction != m_previousDirection)
+        if(m_jumping && direction != m_previousDirection)
         {
             Jump();
             m_previousDirection = direction;
@@ -87,7 +86,7 @@ public class Player : KinematicBody2D
 
     private void UpdateVisuals()
     {
-        m_sprite.SetFlipH(m_velocity.x < 0);
+        m_sprite?.SetFlipH(m_velocity.x < 0);
     }
 
     private bool RightButton => Input.IsActionPressed("game_right");
