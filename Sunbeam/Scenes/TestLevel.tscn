@@ -1,100 +1,179 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Prefabs/Block.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/SceneRoot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/PauseMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Block.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Script/LevelEnd.cs" type="Script" id=5]
 
-[node name="root" type="Node" index="0"]
+[sub_resource type="RectangleShape2D" id=1]
 
-[node name="Position2D" type="Position2D" parent="." index="0"]
+custom_solver_bias = 0.0
+extents = Vector2( 50, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 20, 10 )
+
+[node name="Scene" index="0" instance=ExtResource( 1 )]
+
+[node name="UI" type="CanvasLayer" parent="." index="0"]
+
+layer = 128
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Control" parent="UI" index="0" instance=ExtResource( 2 )]
+
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = -1.0
+margin_bottom = -1.0
+_sections_unfolded = [ "Pause", "Visibility" ]
+
+[node name="Player" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 48.0194, 558.953 )
+z_index = 10
+_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+
+[node name="Position2D" type="Position2D" parent="." index="2"]
 
 editor/display_folded = true
-z_index = -1
-_sections_unfolded = [ "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StaticBody2D" parent="Position2D" index="0" instance=ExtResource( 4 )]
+
+position = Vector2( 0, 301.907 )
+scale = Vector2( 1, 20.2247 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D2" parent="Position2D" index="1" instance=ExtResource( 4 )]
+
+position = Vector2( 1021.64, 297.879 )
+scale = Vector2( 1, 19.9679 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D3" parent="Position2D" index="2" instance=ExtResource( 4 )]
+
+position = Vector2( 500.336, -5.78864 )
+rotation = 1.5708
+scale = Vector2( 1, 32 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D4" parent="Position2D" index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 253.385, 613.224 )
+rotation = 1.5708
+scale = Vector2( 1, 16.8401 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D5" parent="Position2D" index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 442.193, 584.73 )
+rotation = 1.5708
+scale = Vector2( 6.04005, 12.2808 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D11" parent="Position2D" index="5" instance=ExtResource( 4 )]
+
+position = Vector2( 223.525, 613.969 )
+rotation = 1.5708
+scale = Vector2( 4.20292, 6.25081 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D7" parent="Position2D" index="6" instance=ExtResource( 4 )]
+
+position = Vector2( 846.354, 304.664 )
+rotation = 1.5708
+scale = Vector2( 6.58164, 4.83026 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D8" parent="Position2D" index="7" instance=ExtResource( 4 )]
+
+position = Vector2( 543.908, 255.979 )
+rotation = 1.5708
+scale = Vector2( 1.09105, 4.83026 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D10" parent="Position2D" index="8" instance=ExtResource( 4 )]
+
+position = Vector2( 393.803, 200.968 )
+rotation = 2.18166
+scale = Vector2( 1.09105, 6.34909 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D9" parent="Position2D" index="9" instance=ExtResource( 4 )]
+
+position = Vector2( 164.088, 145.585 )
+rotation = 1.5708
+scale = Vector2( 1.09105, 9.75598 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D6" parent="Position2D" index="10" instance=ExtResource( 4 )]
+
+position = Vector2( 884.974, 585.629 )
+rotation = 1.5708
+scale = Vector2( 5.99972, 9.52961 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Reset Area" type="Area2D" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( 687.055, 671.414 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="StaticBody2D" parent="Position2D" index="0" instance=ExtResource( 1 )]
+[node name="Collision" type="CollisionShape2D" parent="Reset Area" index="0"]
 
-position = Vector2( 173.426, 630.191 )
-scale = Vector2( 13.4513, 8.84827 )
-z_index = -1
+shape = SubResource( 1 )
 
-[node name="StaticBody2D2" parent="Position2D" index="1" instance=ExtResource( 1 )]
-
-position = Vector2( 500.741, 596.88 )
-scale = Vector2( 13.4513, 8.84827 )
-z_index = -1
-
-[node name="StaticBody2D6" parent="Position2D" index="2" instance=ExtResource( 1 )]
-
-position = Vector2( 1046.25, 593.865 )
-rotation = -0.523599
-scale = Vector2( 10, 10 )
-z_index = -1
-_sections_unfolded = [ "Transform" ]
-
-[node name="StaticBody2D3" parent="Position2D" index="3" instance=ExtResource( 1 )]
-
-position = Vector2( 848.617, 637.578 )
-scale = Vector2( 13.4513, 8.84827 )
-z_index = -1
-
-[node name="StaticBody2D5" parent="Position2D" index="4" instance=ExtResource( 1 )]
-
-position = Vector2( -27.7677, 265.343 )
-scale = Vector2( 2.65587, 17.4652 )
-z_index = -1
-
-[node name="StaticBody2D9" parent="Position2D" index="5" instance=ExtResource( 1 )]
-
-position = Vector2( 1062.5, 198.727 )
-scale = Vector2( 2.65587, 14.4074 )
-z_index = -1
-
-[node name="StaticBody2D8" parent="Position2D" index="6" instance=ExtResource( 1 )]
-
-position = Vector2( 511.741, -39.4122 )
-rotation = 1.5708
-scale = Vector2( 2.65587, 35.5129 )
-z_index = -1
-_sections_unfolded = [ "Transform" ]
-
-[node name="StaticBody2D7" parent="Position2D" index="7" instance=ExtResource( 1 )]
-
-position = Vector2( 171.288, 247.789 )
-scale = Vector2( 3.35138, 6.16986 )
-z_index = -1
-
-[node name="StaticBody2D10" parent="Position2D" index="8" instance=ExtResource( 1 )]
-
-position = Vector2( 400.523, 294.178 )
-scale = Vector2( 4.26496, 1.02573 )
-z_index = -1
-
-[node name="StaticBody2D11" parent="Position2D" index="9" instance=ExtResource( 1 )]
-
-position = Vector2( 609.852, 167.929 )
-scale = Vector2( 4.26496, 1.02573 )
-z_index = -1
-
-[node name="StaticBody2D12" parent="Position2D" index="10" instance=ExtResource( 1 )]
-
-position = Vector2( 895.02, 95.5762 )
-scale = Vector2( 9.83204, 1.02573 )
-z_index = -1
-
-[node name="Level Name" type="Label" parent="." index="1"]
+[node name="Label" type="Label" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 21.0
-margin_top = 9.0
-margin_right = 109.0
-margin_bottom = 33.0
+margin_left = 31.0
+margin_top = 33.0
+margin_right = 77.0
+margin_bottom = 47.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Finish"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label2" type="Label" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 36.0
+margin_top = 498.0
+margin_right = 101.0
+margin_bottom = 512.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -105,10 +184,28 @@ text = "Test Level"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Rect" ]
 
-[node name="Player" parent="." index="2" instance=ExtResource( 2 )]
+[node name="MainMenu" type="Area2D" parent="." index="6"]
 
-position = Vector2( 172.924, 427.333 )
+position = Vector2( 50.091, 132.46 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenu" index="0"]
+
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Reset Area" to="." method="RealoadScene"]
+
+[connection signal="body_entered" from="MainMenu" to="MainMenu" method="LoadScene"]
 
 
