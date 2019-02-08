@@ -38,7 +38,7 @@ public class Player : KinematicBody2D
         if(IsOnFloor())
         {
             m_previousDirection = Direction.None;
-            if(m_jumping)
+            if (m_jumping)
             {
                 m_jumping = false;
             }
@@ -111,7 +111,29 @@ public class Player : KinematicBody2D
 
     private void UpdateVisuals()
     {
+        if (m_sprite == null) return;
         m_sprite?.SetFlipH(m_velocity.x < 0);
+        return;
+        if (IsOnFloor())
+        {
+            var action = m_velocity.x == 0 ? "Idle" : (m_velocity.x < 0 ? "Walk Left" : "Walk Right");
+            GD.Print(action);
+        }
+        else
+        {
+            var action = (m_velocity.x == 0)
+                ? m_velocity.y < 0
+                    ? "Jump"
+                    : "Fall"
+                : m_velocity.y < 0
+                    ? m_velocity.x < 0
+                        ? "Jump Left"
+                        : "Jump Right"
+                    : m_velocity.x < 0 
+                        ? "Fall Left" 
+                        : "Fall Right";
+            GD.Print(action);
+        }
     }
 
     private bool RightButton => Input.IsActionPressed("game_right");
