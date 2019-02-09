@@ -2,10 +2,15 @@ using Godot;
 
 public class Player : KinematicBody2D
 {
+    private const string IdleAnimation = "Idle";
+    private const string WalkAnimation = "Walk";
+    private const string JumpAnimation = "Jump";
+    private const string FallAnimation = "Fall";
     private const int Gravity = 1200;
     private Direction m_previousDirection;
+    private Direction m_wallDirection;
     private Vector2 m_velocity;
-    private Sprite m_sprite;
+    private AnimatedSprite m_sprite;
     private bool m_jumpRequested;
     private bool m_leftRequested;
     private bool m_rightRequested;
@@ -18,10 +23,57 @@ public class Player : KinematicBody2D
     {
         SetScale(Vector2.One);
         m_velocity = new Vector2(0, 0);
-        m_sprite = (Sprite)GetNode("Sprite");
+        m_sprite = (AnimatedSprite)GetNode("Sprite");
     }
 
     public override void _Process(float delta)
+    {
+        UpdateInput();
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        UpdateVelocity(delta);
+        UpdateVisuals();
+        m_velocity = MoveAndSlide(m_velocity, new Vector2(0, -1), floorMaxAngle: 0.85f);
+    }
+
+    private void UpdateVelocity(float delta)
+    {
+        m_velocity.y += Gravity * delta;
+
+        UpdateJump(delta);
+        UpdateHorizontalVelocity();
+
+        m_jumpRequested = false;
+        m_leftRequested = false;
+        m_rightRequested = false;
+    }
+
+    private void UpdateHorizontalVelocity()
+    {
+        m_velocity.x = 0;
+
+        if(m_rightRequested)
+        {
+            if(m_wallDirection != Direction.Right)
+            {
+                m_wallDirection = Direction.None;
+                m_velocity.x += m_speed;
+            }
+        }
+
+        if(m_leftRequested)
+        {
+            if(m_wallDirection != Direction.Left)
+            {
+                m_wallDirection = Direction.None;
+                m_velocity.x -= m_speed;
+            }
+        }
+    }
+
+    private void UpdateInput()
     {
         if(!JumpButton)
         {
@@ -32,26 +84,17 @@ public class Player : KinematicBody2D
         m_leftRequested = LeftButton;
     }
 
-    public override void _PhysicsProcess(float delta)
+    private void UpdateJump(float delta)
     {
-        m_velocity.y += Gravity * delta;
         if(IsOnFloor())
         {
             m_previousDirection = Direction.None;
-            if (m_jumping)
+            if(m_jumping)
             {
                 m_jumping = false;
             }
         }
 
-        UpdateInput(delta);
-        UpdateVisuals();
-        m_velocity = MoveAndSlide(m_velocity, new Vector2(0, -1), floorMaxAngle: 0.85f);
-    }
-
-    public void UpdateInput(float delta)
-    {
-        m_velocity.x = 0;
         if(m_jumpRequested)
         {
             if(IsOnFloor())
@@ -65,26 +108,14 @@ public class Player : KinematicBody2D
             else if(IsOnWall())
             {
                 WallJump();
+                m_wallDirection = m_previousDirection;
+                GD.Print(m_wallDirection);
             }
         }
         else
         {
             m_velocity.y -= m_jumpForce * delta;
         }
-
-        if(m_rightRequested)
-        {
-            m_velocity.x += m_speed;
-        }
-
-        if(m_leftRequested)
-        {
-            m_velocity.x -= m_speed;
-        }
-
-        m_jumpRequested = false;
-        m_leftRequested = false;
-        m_rightRequested = false;
     }
 
     private void Jump()
@@ -111,28 +142,14 @@ public class Player : KinematicBody2D
 
     private void UpdateVisuals()
     {
-        if (m_sprite == null) return;
-        m_sprite?.SetFlipH(m_velocity.x < 0);
-        return;
-        if (IsOnFloor())
+        if(m_sprite == null) return;
+        m_sprite.SetFlipH((m_velocity.x == 0) ? m_sprite.IsFlippedH() : (m_velocity.x < 0));
+        var animation = IsOnFloor()
+            ? (m_velocity.x == 0 ? IdleAnimation : WalkAnimation)
+            : (m_velocity.y < 0 ? JumpAnimation : FallAnimation);
+        if(m_sprite.GetAnimation() != animation)
         {
-            var action = m_velocity.x == 0 ? "Idle" : (m_velocity.x < 0 ? "Walk Left" : "Walk Right");
-            GD.Print(action);
-        }
-        else
-        {
-            var action = (m_velocity.x == 0)
-                ? m_velocity.y < 0
-                    ? "Jump"
-                    : "Fall"
-                : m_velocity.y < 0
-                    ? m_velocity.x < 0
-                        ? "Jump Left"
-                        : "Jump Right"
-                    : m_velocity.x < 0 
-                        ? "Fall Left" 
-                        : "Fall Right";
-            GD.Print(action);
+            m_sprite.SetAnimation(animation);
         }
     }
 
