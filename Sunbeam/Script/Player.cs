@@ -10,6 +10,7 @@ public class Player : KinematicBody2D
     private Direction m_previousDirection;
     private Direction m_wallDirection;
     private Vector2 m_velocity;
+    private Vector2 m_externalForce;
     private AnimatedSprite m_sprite;
     private bool m_jumpRequested;
     private bool m_leftRequested;
@@ -18,6 +19,7 @@ public class Player : KinematicBody2D
     private bool m_jumping = false;
     private int m_jumpForce = -500;
     private int m_speed = 200;
+    private int m_maxSpeed = 200;
 
     public override void _Ready()
     {
@@ -44,7 +46,6 @@ public class Player : KinematicBody2D
 
         UpdateJump(delta);
         UpdateHorizontalVelocity();
-
         m_jumpRequested = false;
         m_leftRequested = false;
         m_rightRequested = false;
@@ -71,6 +72,10 @@ public class Player : KinematicBody2D
                 m_velocity.x -= m_speed;
             }
         }
+
+        m_velocity.x += m_externalForce.x;
+        m_velocity.x = Mathf.Clamp(m_velocity.x, -m_maxSpeed, m_maxSpeed);
+        m_externalForce = new Vector2();
     }
 
     private void UpdateInput()
@@ -109,7 +114,6 @@ public class Player : KinematicBody2D
             {
                 WallJump();
                 m_wallDirection = m_previousDirection;
-                GD.Print(m_wallDirection);
             }
         }
         else
@@ -156,4 +160,6 @@ public class Player : KinematicBody2D
     private bool RightButton => Input.IsActionPressed("game_right");
     private bool LeftButton => Input.IsActionPressed("game_left");
     private bool JumpButton => Input.IsActionPressed("game_jump");
+    public Vector2 Velocity => m_velocity;
+    public Vector2 ExternalForce { set => m_externalForce = value; }
 }
