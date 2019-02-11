@@ -6,8 +6,8 @@ namespace Sunbeam.Effects
     /// Base class for creating special effects.
     /// Inherits Area2D and uses body_entered and body_exited to
     /// call ApplyEffect(delta) while player is inside the area.
-    /// 
-    /// To use this class create a class that inherits this class and 
+    ///
+    /// To use this class create a class that inherits this class and
     /// then create ApplyEffec(delta) and OnlyOnGround.
     /// </summary>
     public abstract class Effect : Area2D

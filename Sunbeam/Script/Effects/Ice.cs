@@ -18,7 +18,7 @@ namespace Sunbeam.Effects
         protected override void ApplyEffect(float delta)
         {
             var player = (Player)m_target;
-            player.ExternalForce = m_previousVelocity * 0.95f;
+            player.AddExternalForce(new Vector2(m_previousVelocity.x * 0.95f, 0));
             m_previousVelocity = player.Velocity;
         }
 

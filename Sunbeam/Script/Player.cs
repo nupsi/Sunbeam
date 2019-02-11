@@ -40,6 +40,11 @@ public class Player : KinematicBody2D
         m_velocity = MoveAndSlide(m_velocity, new Vector2(0, -1), floorMaxAngle: 0.85f);
     }
 
+    public void AddExternalForce(Vector2 force)
+    {
+        m_externalForce += force;
+    }
+
     private void UpdateVelocity(float delta)
     {
         m_velocity.y += Gravity * delta;
@@ -73,7 +78,7 @@ public class Player : KinematicBody2D
             }
         }
 
-        m_velocity.x += m_externalForce.x;
+        m_velocity += m_externalForce;
         m_velocity.x = Mathf.Clamp(m_velocity.x, -m_maxSpeed, m_maxSpeed);
         m_externalForce = new Vector2();
     }
@@ -161,5 +166,4 @@ public class Player : KinematicBody2D
     private bool LeftButton => Input.IsActionPressed("game_left");
     private bool JumpButton => Input.IsActionPressed("game_jump");
     public Vector2 Velocity => m_velocity;
-    public Vector2 ExternalForce { set => m_externalForce = value; }
 }

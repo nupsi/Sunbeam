@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\Effects\Ice.cs" />
     <Compile Include="Script\Effects\Effect.cs" />
+    <Compile Include="Script\Effects\Trampoline.cs" />
     <Compile Include="Script\GUI\PauseMenu.cs" />
     <Compile Include="Script\GUI\MainMenu.cs" />
     <Compile Include="Script\GUI\Menu.cs" />
