@@ -6,9 +6,4 @@ public class Menu : Control
     {
         GetTree().Quit();
     }
-
-    public static string GetScene(string _name)
-    {
-        return string.Format("Scenes/{0}.tscn", _name.Trim());
-    }
 }

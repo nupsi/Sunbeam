@@ -1,7 +1,12 @@
+using Godot;
+
 public class MainMenu : Menu
 {
+    [Export]
+    public string PlaySceneName;
+
     private void Play()
     {
-        GetTree().ChangeScene(GetScene("TestLevel"));
+        GetTree().ChangeScene(SceneManager.GetScene(PlaySceneName));
     }
 }
