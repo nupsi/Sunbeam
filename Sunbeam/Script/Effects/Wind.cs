@@ -4,7 +4,12 @@ namespace Sunbeam.Effects
 {
     public class Wind : Effect
     {
-        private int m_streinght = 100;
+        [Export]
+        public Direction Direction;
+
+        [Export]
+        public int Strength = 100;
+
         private Vector2 m_force;
 
         protected override void ApplyEffect(float delta)
@@ -21,17 +26,28 @@ namespace Sunbeam.Effects
             {
                 if(m_force == Vector2.Zero)
                 {
-                    var name = GetName().ToLower();
-                    if(name.Contains("left"))
-                        m_force = new Vector2(-m_streinght, 0);
-                    else if(name.Contains("right"))
-                        m_force = new Vector2(m_streinght, 0);
-                    else if(name.Contains("up"))
-                        m_force = new Vector2(0, -m_streinght);
-                    else if(name.Contains("down"))
-                        m_force = new Vector2(0, m_streinght);
-                    else
-                        GD.Print("Add 'up', 'down', 'left' or 'right' to Area2D name that contains Wind script to define the wind direction");
+                    switch(Direction)
+                    {
+                        case Direction.Down:
+                            m_force = new Vector2(0, Strength);
+                            break;
+
+                        case Direction.Up:
+                            m_force = new Vector2(0, -Strength);
+                            break;
+
+                        case Direction.Left:
+                            m_force = new Vector2(-Strength, 0);
+                            break;
+
+                        case Direction.Right:
+                            m_force = new Vector2(Strength, 0);
+                            break;
+
+                        default:
+                            GD.Print("Set Wind Direction!");
+                            break;
+                    }
                 }
 
                 return m_force;

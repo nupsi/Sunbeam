@@ -118,6 +118,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 6 )
+Force = 1000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effects/Trampoline/Area2D" index="0"]
 
@@ -146,6 +147,8 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 7 )
+Direction = 1
+Strength = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effects/Wind/WindLeft" index="0"]
 
