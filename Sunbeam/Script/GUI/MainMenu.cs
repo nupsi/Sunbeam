@@ -1,12 +1,23 @@
 using Godot;
 
-public class MainMenu : Menu
+namespace Sunbeam.UI
 {
-    [Export]
-    public string PlaySceneName;
-
-    private void Play()
+    public class MainMenu : Menu
     {
-        GetTree().ChangeScene(SceneManager.GetScene(PlaySceneName));
+        [Export]
+        public string PlaySceneName;
+
+        [Export]
+        public string PlayTestSceneName;
+
+        private void Play()
+        {
+            SceneManager.ChangeScene(PlaySceneName);
+        }
+
+        private void PlayTest()
+        {
+            SceneManager.ChangeScene(PlayTestSceneName);
+        }
     }
 }

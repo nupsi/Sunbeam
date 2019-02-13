@@ -1,39 +1,64 @@
 using Godot;
 
-public class SceneManager : Node
+namespace Sunbeam
 {
-    public static SceneManager Instance;
-
-    private float m_time;
-
-    public override void _Ready()
+    public class SceneManager : Node
     {
-        Instance = this;
-        m_time = 0;
-    }
+        public static SceneManager Instance;
 
-    public override void _Process(float delta)
-    {
-        m_time += delta;
-    }
+        [Export]
+        public bool TrackTime;
 
-    public void ChangeScene(string name)
-    {
-        GD.Print("Level completed in " + (Mathf.Round(m_time * 10) / 10) + " seconds!");
-        GetTree().ChangeScene(GetScene(name));
-    }
+        private float m_time;
 
-    private void RealoadScene(object body)
-    {
-        var node = (Node)body;
-        if(node.GetName() == "Player")
+        public override void _Ready()
         {
-            GetTree().ReloadCurrentScene();
+            Instance = this;
+            m_time = 0;
+            Tree.Paused = false;
         }
-    }
 
-    public static string GetScene(string _name)
-    {
-        return string.Format("Scenes/{0}.tscn", _name.Trim());
+        public override void _Process(float delta)
+        {
+            if(TrackTime)
+            {
+                m_time += delta;
+            }
+        }
+
+        public void EndLevel(string nextLevel)
+        {
+            if(TrackTime)
+            {
+                GD.Print("Level completed in " + (Mathf.Round(m_time * 10) / 10) + " seconds!");
+            }
+            ChangeScene(nextLevel);
+        }
+
+        public void ChangeScene(string name)
+        {
+            Tree.ChangeScene(GetScene(name));
+        }
+
+        public void Reload()
+        {
+            Tree.ReloadCurrentScene();
+        }
+
+        private void RealoadScene(object body)
+        {
+            var node = (Node)body;
+            if(node.GetName() == "Player")
+            {
+                Reload();
+            }
+        }
+
+        public static string GetScene(string _name)
+        {
+            return string.Format("Scenes/{0}.tscn", _name.Trim());
+        }
+
+        private SceneTree Tree => GetTree();
     }
 }

@@ -1,42 +1,49 @@
 using Godot;
 
-public class PauseMenu : Menu
+namespace Sunbeam.UI
 {
-    public override void _Ready()
+    public class PauseMenu : Menu
     {
-        SetProcessInput(true);
-        TogglePause(false);
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if(Escape)
+        public override void _Ready()
         {
-            TogglePause(!Paused);
+            SetProcessInput(true);
+            TogglePause(false);
         }
-    }
 
-    public void Pause()
-    {
-        TogglePause(true);
-    }
+        public override void _Input(InputEvent @event)
+        {
+            if(Escape)
+            {
+                TogglePause(!GetTree().Paused);
+            }
+        }
 
-    public void Continue()
-    {
-        TogglePause(false);
-    }
+        public void Pause()
+        {
+            TogglePause(true);
+        }
 
-    private void TogglePause(bool paused)
-    {
-        Paused = paused;
-        Visible = paused;
-    }
+        public void Continue()
+        {
+            TogglePause(false);
+        }
 
-    private bool Escape => Input.IsActionJustPressed("ui_cancel");
+        public void Restart()
+        {
+            SceneManager.Reload();
+        }
 
-    private bool Paused
-    {
-        get => GetTree().Paused;
-        set => GetTree().Paused = value;
+        public void MainMenu()
+        {
+            SceneManager.ChangeScene("MainMenu");
+        }
+
+        private void TogglePause(bool paused)
+        {
+            GetTree().Paused = paused;
+            Visible = paused;
+        }
+
+        private bool Escape => Input.IsActionJustPressed("ui_cancel");
     }
 }

@@ -1,8 +1,11 @@
-﻿public enum Direction
+﻿namespace Sunbeam
 {
-    None,
-    Left,
-    Right,
-    Up,
-    Down
+    public enum Direction
+    {
+        None,
+        Left,
+        Right,
+        Up,
+        Down
+    }
 }

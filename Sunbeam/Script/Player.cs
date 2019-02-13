@@ -1,169 +1,172 @@
 using Godot;
 
-public class Player : KinematicBody2D
+namespace Sunbeam
 {
-    private const string IdleAnimation = "Idle";
-    private const string WalkAnimation = "Walk";
-    private const string JumpAnimation = "Jump";
-    private const string FallAnimation = "Fall";
-    private const int Gravity = 1200;
-    private Direction m_previousDirection;
-    private Direction m_wallDirection;
-    private Vector2 m_velocity;
-    private Vector2 m_externalForce;
-    private AnimatedSprite m_sprite;
-    private bool m_jumpRequested;
-    private bool m_leftRequested;
-    private bool m_rightRequested;
-    private bool m_fromGround;
-    private bool m_jumping = false;
-    private int m_jumpForce = -500;
-    private int m_speed = 200;
-    private int m_maxSpeed = 200;
-
-    public override void _Ready()
+    public class Player : KinematicBody2D
     {
-        SetScale(Vector2.One);
-        m_velocity = new Vector2(0, 0);
-        m_sprite = (AnimatedSprite)GetNode("Sprite");
-    }
+        private const string IdleAnimation = "Idle";
+        private const string WalkAnimation = "Walk";
+        private const string JumpAnimation = "Jump";
+        private const string FallAnimation = "Fall";
+        private const int Gravity = 1200;
+        private Direction m_previousDirection;
+        private Direction m_wallDirection;
+        private Vector2 m_velocity;
+        private Vector2 m_externalForce;
+        private AnimatedSprite m_sprite;
+        private bool m_jumpRequested;
+        private bool m_leftRequested;
+        private bool m_rightRequested;
+        private bool m_fromGround;
+        private bool m_jumping = false;
+        private int m_jumpForce = -500;
+        private int m_speed = 200;
+        private int m_maxSpeed = 200;
 
-    public override void _Process(float delta)
-    {
-        UpdateInput();
-    }
-
-    public override void _PhysicsProcess(float delta)
-    {
-        UpdateVelocity(delta);
-        UpdateVisuals();
-        m_velocity = MoveAndSlide(m_velocity, new Vector2(0, -1), floorMaxAngle: 0.85f);
-    }
-
-    public void AddExternalForce(Vector2 force)
-    {
-        m_externalForce += force;
-    }
-
-    private void UpdateVelocity(float delta)
-    {
-        m_velocity.y += Gravity * delta;
-
-        UpdateJump(delta);
-        UpdateHorizontalVelocity();
-        m_jumpRequested = false;
-        m_leftRequested = false;
-        m_rightRequested = false;
-    }
-
-    private void UpdateHorizontalVelocity()
-    {
-        m_velocity.x = 0;
-
-        if(m_rightRequested)
+        public override void _Ready()
         {
-            if(m_wallDirection != Direction.Right)
+            SetScale(Vector2.One);
+            m_velocity = new Vector2(0, 0);
+            m_sprite = (AnimatedSprite)GetNode("Sprite");
+        }
+
+        public override void _Process(float delta)
+        {
+            UpdateInput();
+        }
+
+        public override void _PhysicsProcess(float delta)
+        {
+            UpdateVelocity(delta);
+            UpdateVisuals();
+            m_velocity = MoveAndSlide(m_velocity, new Vector2(0, -1), floorMaxAngle: 0.85f);
+        }
+
+        public void AddExternalForce(Vector2 force)
+        {
+            m_externalForce += force;
+        }
+
+        private void UpdateVelocity(float delta)
+        {
+            m_velocity.y += Gravity * delta;
+
+            UpdateJump(delta);
+            UpdateHorizontalVelocity();
+            m_jumpRequested = false;
+            m_leftRequested = false;
+            m_rightRequested = false;
+        }
+
+        private void UpdateHorizontalVelocity()
+        {
+            m_velocity.x = 0;
+
+            if(m_rightRequested)
             {
-                m_wallDirection = Direction.None;
-                m_velocity.x += m_speed;
+                if(m_wallDirection != Direction.Right)
+                {
+                    m_wallDirection = Direction.None;
+                    m_velocity.x += m_speed;
+                }
             }
-        }
 
-        if(m_leftRequested)
-        {
-            if(m_wallDirection != Direction.Left)
+            if(m_leftRequested)
             {
-                m_wallDirection = Direction.None;
-                m_velocity.x -= m_speed;
+                if(m_wallDirection != Direction.Left)
+                {
+                    m_wallDirection = Direction.None;
+                    m_velocity.x -= m_speed;
+                }
             }
+
+            m_velocity += m_externalForce;
+            m_velocity.x = Mathf.Clamp(m_velocity.x, -m_maxSpeed, m_maxSpeed);
+            m_externalForce = new Vector2();
         }
 
-        m_velocity += m_externalForce;
-        m_velocity.x = Mathf.Clamp(m_velocity.x, -m_maxSpeed, m_maxSpeed);
-        m_externalForce = new Vector2();
-    }
-
-    private void UpdateInput()
-    {
-        if(!JumpButton)
+        private void UpdateInput()
         {
-            m_fromGround = false;
-        }
-        m_jumpRequested = JumpButton;
-        m_rightRequested = RightButton;
-        m_leftRequested = LeftButton;
-    }
-
-    private void UpdateJump(float delta)
-    {
-        if(IsOnFloor())
-        {
-            m_previousDirection = Direction.None;
-            if(m_jumping)
+            if(!JumpButton)
             {
-                m_jumping = false;
+                m_fromGround = false;
             }
+            m_jumpRequested = JumpButton;
+            m_rightRequested = RightButton;
+            m_leftRequested = LeftButton;
         }
 
-        if(m_jumpRequested)
+        private void UpdateJump(float delta)
         {
             if(IsOnFloor())
             {
-                if(!m_fromGround)
+                m_previousDirection = Direction.None;
+                if(m_jumping)
                 {
-                    m_fromGround = true;
-                    Jump();
+                    m_jumping = false;
                 }
             }
-            else if(IsOnWall())
+
+            if(m_jumpRequested)
             {
-                WallJump();
-                m_wallDirection = m_previousDirection;
+                if(IsOnFloor())
+                {
+                    if(!m_fromGround)
+                    {
+                        m_fromGround = true;
+                        Jump();
+                    }
+                }
+                else if(IsOnWall())
+                {
+                    WallJump();
+                    m_wallDirection = m_previousDirection;
+                }
+            }
+            else
+            {
+                m_velocity.y -= m_jumpForce * delta;
             }
         }
-        else
+
+        private void Jump()
         {
-            m_velocity.y -= m_jumpForce * delta;
+            m_jumping = true;
+            m_velocity.y = m_jumpForce;
         }
-    }
 
-    private void Jump()
-    {
-        m_jumping = true;
-        m_velocity.y = m_jumpForce;
-    }
-
-    private void WallJump()
-    {
-        var offset = (int)Mathf.Clamp(GetSlideCollision(0).Position.x - Position.x, -1, 1);
-        var direction = (offset == 0)
-            ? Direction.None
-            : (offset < 0)
-                ? Direction.Left
-                : Direction.Right;
-
-        if(m_jumping && direction != m_previousDirection)
+        private void WallJump()
         {
-            Jump();
-            m_previousDirection = direction;
-        }
-    }
+            var offset = (int)Mathf.Clamp(GetSlideCollision(0).Position.x - Position.x, -1, 1);
+            var direction = (offset == 0)
+                ? Direction.None
+                : (offset < 0)
+                    ? Direction.Left
+                    : Direction.Right;
 
-    private void UpdateVisuals()
-    {
-        if(m_sprite == null) return;
-        m_sprite.SetFlipH((m_velocity.x == 0) ? m_sprite.IsFlippedH() : (m_velocity.x < 0));
-        var animation = IsOnFloor()
-            ? (m_velocity.x == 0 ? IdleAnimation : WalkAnimation)
-            : (m_velocity.y < 0 ? JumpAnimation : FallAnimation);
-        if(m_sprite.GetAnimation() != animation)
+            if(m_jumping && direction != m_previousDirection)
+            {
+                Jump();
+                m_previousDirection = direction;
+            }
+        }
+
+        private void UpdateVisuals()
         {
-            m_sprite.SetAnimation(animation);
+            if(m_sprite == null) return;
+            m_sprite.SetFlipH((m_velocity.x == 0) ? m_sprite.IsFlippedH() : (m_velocity.x < 0));
+            var animation = IsOnFloor()
+                ? (m_velocity.x == 0 ? IdleAnimation : WalkAnimation)
+                : (m_velocity.y < 0 ? JumpAnimation : FallAnimation);
+            if(m_sprite.GetAnimation() != animation)
+            {
+                m_sprite.SetAnimation(animation);
+            }
         }
-    }
 
-    private bool RightButton => Input.IsActionPressed("game_right");
-    private bool LeftButton => Input.IsActionPressed("game_left");
-    private bool JumpButton => Input.IsActionPressed("game_jump");
-    public Vector2 Velocity => m_velocity;
+        private bool RightButton => Input.IsActionPressed("game_right");
+        private bool LeftButton => Input.IsActionPressed("game_left");
+        private bool JumpButton => Input.IsActionPressed("game_jump");
+        public Vector2 Velocity => m_velocity;
+    }
 }

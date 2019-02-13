@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Script/SceneManager.cs" type="Script" id=1]
 
-[node name="Scene" type="Node" index="0"]
+[node name="Scene" type="Node"]
 
 script = ExtResource( 1 )
+TrackTime = false
 
 

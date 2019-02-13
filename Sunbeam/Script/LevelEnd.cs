@@ -1,16 +1,24 @@
 using Godot;
 
-public class LevelEnd : Area2D
+namespace Sunbeam
 {
-    [Export]
-    public string SceneName;
-
-    private void LoadScene(object body)
+    public class LevelEnd : Area2D
     {
-        var node = (Node)body;
-        if (node.GetName() == "Player")
+        [Export]
+        public string SceneName;
+
+        public override void _Ready()
         {
-            SceneManager.Instance.ChangeScene(SceneName);
+            Connect("body_entered", this, "LoadScene");
+        }
+
+        private void LoadScene(object body)
+        {
+            var node = (Node)body;
+            if(node.GetName() == "Player")
+            {
+                SceneManager.Instance.EndLevel(SceneName);
+            }
         }
     }
 }

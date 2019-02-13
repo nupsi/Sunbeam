@@ -1,9 +1,14 @@
 ﻿using Godot;
 
-public class Menu : Control
+namespace Sunbeam.UI
 {
-    public void Quit()
+    public class Menu : Control
     {
-        GetTree().Quit();
+        public void Quit()
+        {
+            GetTree().Quit();
+        }
+
+        protected SceneManager SceneManager => SceneManager.Instance;
     }
 }
