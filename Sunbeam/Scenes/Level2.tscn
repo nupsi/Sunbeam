@@ -103,6 +103,11 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="StaticBody2D4" parent="Position2D" index="6" instance=ExtResource( 3 )]
+
+position = Vector2( 491.212, 143.168 )
+scale = Vector2( 0.494982, 0.283106 )
+
 [node name="MainMenu" type="Area2D" parent="." index="2"]
 
 editor/display_folded = true

@@ -64,20 +64,12 @@ namespace Sunbeam
 
             if(m_rightRequested)
             {
-                if(m_wallDirection != Direction.Right)
-                {
-                    m_wallDirection = Direction.None;
-                    m_velocity.x += m_speed;
-                }
+                m_velocity.x += m_speed;
             }
 
             if(m_leftRequested)
             {
-                if(m_wallDirection != Direction.Left)
-                {
-                    m_wallDirection = Direction.None;
-                    m_velocity.x -= m_speed;
-                }
+                m_velocity.x -= m_speed;
             }
 
             m_velocity += m_externalForce;

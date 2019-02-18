@@ -202,7 +202,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
-SceneName = "Level2"
+SceneName = "Level0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestLevel2" index="0"]
 
