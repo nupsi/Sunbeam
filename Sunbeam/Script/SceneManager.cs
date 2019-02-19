@@ -56,7 +56,7 @@ namespace Sunbeam
 
         public static string GetScene(string _name)
         {
-            return string.Format("Scenes/{0}.tscn", _name.Trim());
+            return string.Format("res://Scenes/{0}.tscn", _name.Trim());
         }
 
         private SceneTree Tree => GetTree();
