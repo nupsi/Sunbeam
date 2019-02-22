@@ -57,6 +57,7 @@
     <Compile Include="Script\Gameplay\Events\DisplayCutscene.cs" />
     <Compile Include="Script\Gameplay\Events\DisplayDialog.cs" />
     <Compile Include="Script\Gameplay\Events\Event.cs" />
+    <Compile Include="Script\Gameplay\Platform.cs" />
     <Compile Include="Script\Gameplay\Triggers\LevelReset.cs" />
     <Compile Include="Script\GUI\Cutscene.cs" />
     <Compile Include="Script\GUI\PauseMenu.cs" />

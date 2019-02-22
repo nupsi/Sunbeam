@@ -1,17 +1,21 @@
 ﻿using Godot;
+using Sunbeam.UI;
 
 namespace Sunbeam.Events
 {
     public class DisplayCutscene : Event
     {
+        [Export]
+        public string Text;
+
         protected override void TriggerEvent()
         {
-            GD.Print("Display Cutscene");
+            Cutscene.Instance.ShowCutscene(Text);
         }
 
         protected override void ExitEvent()
         {
-            GD.Print("Hide Cutscene");
+            Cutscene.Instance.HideCutscene();
         }
 
         protected override bool ListenExit => true;

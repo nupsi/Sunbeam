@@ -1,6 +1,4 @@
 ﻿using Godot;
-using System;
-//using System.Threading.Tasks;
 
 namespace Sunbeam.UI
 {
@@ -8,46 +6,52 @@ namespace Sunbeam.UI
     {
         public static Cutscene Instance;
 
-        private int m_blackBarSize = 80;
+        private Tween.TransitionType transition = Tween.TransitionType.Linear;
+        private Tween.EaseType ease = Tween.EaseType.In;
+        private float m_blackBarSize = 80;
+        private float time = 0.5f;
         private Panel m_top;
         private Panel m_bottom;
         private Label m_label;
+        private Tween m_tween;
 
         public override void _Ready()
         {
             Instance = this;
-            m_top = (Panel)GetChild(0);
-            m_bottom = (Panel)GetChild(1);
-            m_label = (Label)GetChild(2);
+            m_top = (Panel)GetNode("Top");
+            m_bottom = (Panel)GetNode("Bottom");
+            m_label = (Label)GetNode("Label");
+            m_tween = (Tween)GetNode("Tween");
+            m_label.Text = "";
         }
 
         public void ShowCutscene(string text)
         {
             m_label.Text = text;
-            //Show(true);
+            DoTween(m_blackBarSize);
         }
 
         public void HideCutscene()
         {
-            m_label.Text = "";
-            //Show(false);
+            m_label.Text = string.Empty;
+            DoTween(0);
         }
 
-        //private async void Show(bool show)
-        //{
-        //    await new Task(async () =>
-        //    {
-        //        var delay = 10;
-        //        var target = show ? m_blackBarSize : 0;
-        //        var addition = show ? 2 : -2;
+        private void DoTween(float target)
+        {
+            m_tween.InterpolateMethod(this, "Top", m_top.MarginBottom, target, time, transition, ease);
+            m_tween.InterpolateMethod(this, "Bottom", m_bottom.MarginTop, -target, time, transition, ease);
+            m_tween.Start();
+        }
 
-        //        while(m_top.MarginBottom != target)
-        //        {
-        //            m_top.MarginBottom += addition;
-        //            m_bottom.MarginTop -= addition;
-        //            await Task.Delay(delay);
-        //        }
-        //    });
-        //}
+        private void Top(float value)
+        {
+            m_top.MarginBottom = value;
+        }
+
+        private void Bottom(float value)
+        {
+            m_bottom.MarginTop = value;
+        }
     }
 }
