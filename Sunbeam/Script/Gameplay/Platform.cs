@@ -15,12 +15,19 @@ namespace Sunbeam
         private CollisionShape2D m_collision;
         private ProgressBar m_bar;
         private bool m_triggered;
+        private bool m_cancel;
 
         public override void _Ready()
         {
             m_bar = (ProgressBar)GetNode("ProgressBar");
             m_collision = (CollisionShape2D)GetNode("CollisionShape2D");
             (GetNode("Area2D") as Area2D)?.Connect("body_entered", this, "BodyEnter");
+        }
+
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            m_cancel = true;
         }
 
         public void BodyEnter(object body)
@@ -35,13 +42,14 @@ namespace Sunbeam
             }
         }
 
-        private async void StartBreakTimer()
+        private void StartBreakTimer()
         {
             m_triggered = true;
-            await Task.Run(async () =>
+            Task.Run(async () =>
             {
                 while(m_bar.Value < 100)
                 {
+                    if(m_cancel) return;
                     m_bar.Value++;
                     await Task.Delay(BreakTime * 10);
                     while(Paused) await PauseDelay;
@@ -51,13 +59,14 @@ namespace Sunbeam
             });
         }
 
-        private async void StartRespawnTimer()
+        private void StartRespawnTimer()
         {
             Enabled(false);
-            await Task.Run(async () =>
+            Task.Run(async () =>
             {
                 for(int i = 0; i < RespawnTime * 10; i++)
                 {
+                    if(m_cancel) return;
                     await Task.Delay(RespawnTime * 10);
                     while(Paused) await PauseDelay;
                 }

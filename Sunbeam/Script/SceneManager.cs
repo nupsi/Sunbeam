@@ -1,4 +1,6 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 
 namespace Sunbeam
 {
@@ -10,13 +12,19 @@ namespace Sunbeam
         public bool TrackTime;
 
         private float m_time;
+        private List<Checkpoint> m_checkpoints;
+        private SceneData m_sceneData;
 
         public override void _Ready()
         {
             Instance = this;
+            m_checkpoints = new List<Checkpoint>();
             m_time = 0;
             Tree.Paused = false;
+            m_sceneData = GameManager.Instance.GetSceneData(GetName());
+            MoveToCheckpoint();
         }
+
 
         public override void _Process(float delta)
         {
@@ -24,6 +32,28 @@ namespace Sunbeam
             {
                 m_time += delta;
             }
+        }
+
+        public void ReqisterCheckpoint(Checkpoint checkpoint)
+        {
+            GD.Print("Reqister Checkpoint: " + checkpoint.CheckpointIndex);
+            m_checkpoints.Add(checkpoint);
+        }
+
+        public void UpdateCheckpoint(int checkpointIndex)
+        {
+            m_sceneData.CheckPoint = checkpointIndex;
+        }
+
+        private void MoveToCheckpoint()
+        {
+            m_checkpoints?.ForEach((point) =>
+            {
+                if(point.CheckpointIndex == m_sceneData.CheckPoint)
+                {
+                    GD.Print("Checkpoint Found");
+                }
+            });
         }
 
         public void EndLevel(string nextLevel)

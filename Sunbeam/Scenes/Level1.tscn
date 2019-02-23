@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Prefabs/SceneRoot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/GUI/GUI_PauseMenu.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Script/Gameplay/Triggers/LevelReset.cs" type="Script" id=9]
 [ext_resource path="res://Script/Gameplay/Triggers/LevelEnd.cs" type="Script" id=10]
 [ext_resource path="res://Script/Gameplay/Events/DisplayCutscene.cs" type="Script" id=11]
+[ext_resource path="res://Script/Gameplay/Triggers/Checkpoint.cs" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -22,25 +23,30 @@ extents = Vector2( 200, 10 )
 custom_solver_bias = 0.0
 extents = Vector2( 165.472, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 300, 10 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 20, 40 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
 extents = Vector2( 50, 50 )
+
+[sub_resource type="RectangleShape2D" id=7]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 100 )
 
 [node name="Level1" index="0" instance=ExtResource( 1 )]
 
@@ -73,6 +79,8 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 [node name="CutsceneGUI" parent="GUI/Cutscene" index="0" instance=ExtResource( 3 )]
 
 [node name="Game" type="Node" parent="." index="1"]
+
+editor/display_folded = true
 
 [node name="Sprite2" type="Sprite" parent="Game" index="0"]
 
@@ -136,6 +144,8 @@ scale = Vector2( 2.47298, 0.471043 )
 
 [node name="Effect" type="Node" parent="." index="2"]
 
+editor/display_folded = true
+
 [node name="Start Ice" type="Area2D" parent="Effect" index="0"]
 
 editor/display_folded = true
@@ -195,7 +205,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effect/End Reset" index="0"]
 
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Start Spikes" type="Area2D" parent="Effect" index="3"]
 
@@ -215,7 +225,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effect/Start Spikes" index="0"]
 
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Effect/Start Spikes" index="1"]
 
@@ -243,7 +253,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effect/Walljump" index="0"]
 
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Effect/Walljump" index="1"]
 
@@ -271,7 +281,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effect/Walljump2" index="0"]
 
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Effect/Walljump2" index="1"]
 
@@ -299,7 +309,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effect/Walljump3" index="0"]
 
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Effect/Walljump3" index="1"]
 
@@ -327,7 +337,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Effect/Walljump4" index="0"]
 
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Effect/Walljump4" index="1"]
 
@@ -358,7 +368,7 @@ SceneName = "MainMenu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Area2D" index="0"]
 
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="End Dialog" type="Area2D" parent="Triggers" index="1"]
 
@@ -382,7 +392,7 @@ somewhere ahead, sunbeam thought to itself and continued onwards."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/End Dialog" index="0"]
 
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Start Cutscene" type="Area2D" parent="Triggers" index="2"]
 
@@ -403,7 +413,7 @@ Text = "The Frozen Lake"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Start Cutscene" index="0"]
 
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Start Dialog" type="Area2D" parent="Triggers" index="3"]
 
@@ -426,6 +436,28 @@ glimmer in ethereal glow. It was a beautiful place. But very, very cold as well.
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Start Dialog" index="0"]
 
-shape = SubResource( 5 )
+shape = SubResource( 6 )
+
+[node name="Checkpoint 1" type="Area2D" parent="Triggers" index="4"]
+
+position = Vector2( 1122.7, -320.722 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+CheckpointIndex = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Checkpoint 1" index="0"]
+
+position = Vector2( 0, -50 )
+shape = SubResource( 7 )
+_sections_unfolded = [ "Transform" ]
 
 
