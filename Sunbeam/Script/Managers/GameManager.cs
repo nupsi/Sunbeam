@@ -12,6 +12,7 @@
 
         public void SetCheckpoint(int index)
         {
+            Godot.GD.Print("Set Checkpoint " + index);
             m_sceneData.CheckPoint = index;
         }
 

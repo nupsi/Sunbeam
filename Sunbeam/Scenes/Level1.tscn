@@ -80,8 +80,6 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Game" type="Node" parent="." index="1"]
 
-editor/display_folded = true
-
 [node name="Sprite2" type="Sprite" parent="Game" index="0"]
 
 modulate = Color( 0.582031, 0.862854, 1, 1 )

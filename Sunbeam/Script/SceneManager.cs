@@ -15,13 +15,18 @@ namespace Sunbeam
         private List<Checkpoint> m_checkpoints;
         private SceneData m_sceneData;
 
-        public override void _Ready()
+        public override void _EnterTree()
         {
+            base._EnterTree();
             Instance = this;
             m_checkpoints = new List<Checkpoint>();
+            m_sceneData = GameManager.Instance.GetSceneData(GetName());
+        }
+
+        public override void _Ready()
+        {
             m_time = 0;
             Tree.Paused = false;
-            m_sceneData = GameManager.Instance.GetSceneData(GetName());
             MoveToCheckpoint();
         }
 
@@ -36,22 +41,19 @@ namespace Sunbeam
 
         public void ReqisterCheckpoint(Checkpoint checkpoint)
         {
-            GD.Print("Reqister Checkpoint: " + checkpoint.CheckpointIndex);
             m_checkpoints.Add(checkpoint);
-        }
-
-        public void UpdateCheckpoint(int checkpointIndex)
-        {
-            m_sceneData.CheckPoint = checkpointIndex;
         }
 
         private void MoveToCheckpoint()
         {
+            GD.Print("Move to checkpoint " + m_sceneData.CheckPoint + " | " + m_checkpoints.Count);
             m_checkpoints?.ForEach((point) =>
             {
                 if(point.CheckpointIndex == m_sceneData.CheckPoint)
                 {
                     GD.Print("Checkpoint Found");
+                    var player = (KinematicBody2D)GetNode("Game/Player");
+                    player.Position = point.Position;
                 }
             });
         }

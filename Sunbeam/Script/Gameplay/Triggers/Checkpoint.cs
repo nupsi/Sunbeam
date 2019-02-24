@@ -8,15 +8,18 @@ namespace Sunbeam
         [Export]
         public int CheckpointIndex;
 
-        public override void _Ready()
+        public override void _EnterTree()
         {
-            base._Ready();
             SceneManager.Instance.ReqisterCheckpoint(this);
         }
 
         protected override void EnterArea(object body)
         {
-            GameManager.Instance.SetCheckpoint(CheckpointIndex);
+            var node = (Node)body;
+            if(node.GetName() == m_targetName)
+            {
+                GameManager.Instance.SetCheckpoint(CheckpointIndex);
+            }
         }
 
         protected override void ExitArea(object body) { }
