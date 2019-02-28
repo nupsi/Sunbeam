@@ -1,5 +1,4 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 
 namespace Sunbeam
 {
@@ -23,7 +22,6 @@ namespace Sunbeam
         }
 
         protected override void ExitArea(object body) { }
-
         protected override bool ListenEnter => true;
         protected override bool ListenExit => false;
     }

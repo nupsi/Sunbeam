@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 namespace Sunbeam
@@ -30,7 +29,6 @@ namespace Sunbeam
             MoveToCheckpoint();
         }
 
-
         public override void _Process(float delta)
         {
             if(TrackTime)
@@ -46,12 +44,10 @@ namespace Sunbeam
 
         private void MoveToCheckpoint()
         {
-            GD.Print("Move to checkpoint " + m_sceneData.CheckPoint + " | " + m_checkpoints.Count);
             m_checkpoints?.ForEach((point) =>
             {
                 if(point.CheckpointIndex == m_sceneData.CheckPoint)
                 {
-                    GD.Print("Checkpoint Found");
                     var player = (KinematicBody2D)GetNode("Game/Player");
                     player.Position = point.Position;
                 }
