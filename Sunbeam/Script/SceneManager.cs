@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 namespace Sunbeam
 {
@@ -10,12 +11,22 @@ namespace Sunbeam
         public bool TrackTime;
 
         private float m_time;
+        private List<Checkpoint> m_checkpoints;
+        private SceneData m_sceneData;
+
+        public override void _EnterTree()
+        {
+            base._EnterTree();
+            Instance = this;
+            m_checkpoints = new List<Checkpoint>();
+            m_sceneData = GameManager.Instance.GetSceneData(GetName());
+        }
 
         public override void _Ready()
         {
-            Instance = this;
             m_time = 0;
             Tree.Paused = false;
+            MoveToCheckpoint();
         }
 
         public override void _Process(float delta)
@@ -24,6 +35,23 @@ namespace Sunbeam
             {
                 m_time += delta;
             }
+        }
+
+        public void ReqisterCheckpoint(Checkpoint checkpoint)
+        {
+            m_checkpoints.Add(checkpoint);
+        }
+
+        private void MoveToCheckpoint()
+        {
+            m_checkpoints?.ForEach((point) =>
+            {
+                if(point.CheckpointIndex == m_sceneData.CheckPoint)
+                {
+                    var player = (KinematicBody2D)GetNode("Game/Player");
+                    player.Position = point.Position;
+                }
+            });
         }
 
         public void EndLevel(string nextLevel)
@@ -56,7 +84,7 @@ namespace Sunbeam
 
         public static string GetScene(string _name)
         {
-            return string.Format("Scenes/{0}.tscn", _name.Trim());
+            return string.Format("res://Scenes/{0}.tscn", _name.Trim());
         }
 
         private SceneTree Tree => GetTree();

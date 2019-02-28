@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Script/GUI/PauseMenu.cs" type="Script" id=1]
+[ext_resource path="res://Script/GUI/MainMenu.cs" type="Script" id=1]
 
-[node name="Control" type="Control"]
+[node name="MainMenuGUI" type="Control"]
 
-pause_mode = 2
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -16,41 +15,27 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Pause" ]
+PlaySceneName = "Level0"
+PlayTestSceneName = null
 
-[node name="Background" type="ColorRect" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0, 0, 0, 0.196078 )
-
-[node name="Panel" type="Panel" parent="." index="1"]
+[node name="Background" type="Panel" parent="." index="0"]
 
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -62.0
-margin_top = -49.5
-margin_right = 62.0
-margin_bottom = 49.5
+margin_left = -67.5
+margin_top = -42.5
+margin_right = 67.5
+margin_bottom = 42.5
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
 
-[node name="VerticalContainer" type="VBoxContainer" parent="Panel" index="0"]
+[node name="VerticalContainer" type="VBoxContainer" parent="Background" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -69,13 +54,13 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin" ]
 
-[node name="MenuTitle" type="Label" parent="Panel/VerticalContainer" index="0"]
+[node name="Label" type="Label" parent="Background/VerticalContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 114.0
+margin_right = 125.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -83,19 +68,21 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "Pause Menu"
+text = "Sunbeam"
+align = 1
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="ReturnButton" type="Button" parent="Panel/VerticalContainer" index="1"]
+[node name="Play" type="Button" parent="Background/VerticalContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
-margin_right = 114.0
+margin_right = 125.0
 margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -108,18 +95,18 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Return"
+text = "Play"
 flat = false
 align = 1
 
-[node name="RestartButton" type="Button" parent="Panel/VerticalContainer" index="2"]
+[node name="Quit" type="Button" parent="Background/VerticalContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 42.0
-margin_right = 114.0
+margin_right = 125.0
 margin_bottom = 62.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -132,38 +119,12 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Restart"
+text = "Quit"
 flat = false
 align = 1
 
-[node name="MainMenuButton" type="Button" parent="Panel/VerticalContainer" index="3"]
+[connection signal="pressed" from="Background/VerticalContainer/Play" to="." method="Play"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 66.0
-margin_right = 114.0
-margin_bottom = 86.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Main Menu"
-flat = false
-align = 1
-
-[connection signal="pressed" from="Panel/VerticalContainer/ReturnButton" to="." method="Continue"]
-
-[connection signal="pressed" from="Panel/VerticalContainer/RestartButton" to="." method="Restart"]
-
-[connection signal="pressed" from="Panel/VerticalContainer/MainMenuButton" to="." method="MainMenu"]
+[connection signal="pressed" from="Background/VerticalContainer/Quit" to="." method="Quit"]
 
 

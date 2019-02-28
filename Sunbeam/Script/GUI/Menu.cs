@@ -6,6 +6,7 @@ namespace Sunbeam.UI
     {
         public void Quit()
         {
+            SetPauseMode(PauseModeEnum.Process);
             GetTree().Quit();
         }
 
