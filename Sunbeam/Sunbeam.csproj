@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Gameplay\FallingObject.cs" />
     <Compile Include="Script\Gameplay\Triggers\Checkpoint.cs" />
     <Compile Include="Script\Managers\GameManager.cs" />
     <Compile Include="Script\Gameplay\Effects\Ice.cs" />

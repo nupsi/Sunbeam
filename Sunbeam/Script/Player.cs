@@ -22,12 +22,14 @@ namespace Sunbeam
         private int m_jumpForce = -500;
         private int m_speed = 200;
         private int m_maxSpeed = 200;
+        private AudioStreamPlayer2D m_jumpSound;
 
         public override void _Ready()
         {
             SetScale(Vector2.One);
             m_velocity = new Vector2(0, 0);
             m_sprite = (AnimatedSprite)GetNode("Sprite");
+            m_jumpSound = (AudioStreamPlayer2D)GetNode("JumpSound");
         }
 
         public override void _Process(float delta)
@@ -60,7 +62,10 @@ namespace Sunbeam
 
         private void UpdateHorizontalVelocity()
         {
-            m_velocity.x = 0;
+            if(m_velocity.x != 0)
+            {
+                m_velocity.x += m_velocity.x < 0 ? 20 : -20;
+            }
 
             if(m_rightRequested)
             {
@@ -123,6 +128,7 @@ namespace Sunbeam
 
         private void Jump()
         {
+            m_jumpSound.Play();
             m_jumping = true;
             m_velocity.y = m_jumpForce;
         }
