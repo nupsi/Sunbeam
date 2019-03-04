@@ -9,6 +9,7 @@ namespace Sunbeam
 
         [Export]
         public bool TrackTime;
+        public bool Paused;
 
         private float m_time;
         private List<Checkpoint> m_checkpoints;

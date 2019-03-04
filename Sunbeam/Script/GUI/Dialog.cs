@@ -36,7 +36,7 @@ namespace Sunbeam.UI
         {
             if(m_hint.Visible)
             {
-                if(Input.IsActionPressed("game_jump"))
+                if(CloseInput)
                 {
                     HideCutscene();
                 }
@@ -74,6 +74,15 @@ namespace Sunbeam.UI
         private void Bottom(float value)
         {
             m_bottom.MarginTop = value;
+        }
+
+        private bool CloseInput
+        {
+            get
+            {
+                return (!SceneManager.Instance.Paused
+                    && Input.IsActionJustReleased("game_jump"));
+            }
         }
     }
 }

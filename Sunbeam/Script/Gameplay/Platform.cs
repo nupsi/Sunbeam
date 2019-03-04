@@ -52,7 +52,7 @@ namespace Sunbeam
                     if(m_cancel) return;
                     m_bar.Value++;
                     await Task.Delay(BreakTime * 10);
-                    while(Paused) await PauseDelay;
+                    await Pause();
                 }
                 StartRespawnTimer();
                 return;
@@ -68,7 +68,7 @@ namespace Sunbeam
                 {
                     if(m_cancel) return;
                     await Task.Delay(RespawnTime * 10);
-                    while(Paused) await PauseDelay;
+                    await Pause();
                 }
                 m_bar.Value = 0;
                 m_triggered = false;
@@ -83,7 +83,17 @@ namespace Sunbeam
             m_collision.Disabled = !enabled;
         }
 
-        private bool Paused => GetTree().Paused;
-        private Task PauseDelay => Task.Delay(10);
+        private async Task Pause()
+        {
+            while(GetTree().Paused)
+            {
+                await Task.Delay(10);
+                if(m_cancel)
+                {
+                    return;
+                }
+            }
+            return;
+        }
     }
 }

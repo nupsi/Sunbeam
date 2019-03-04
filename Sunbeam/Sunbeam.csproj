@@ -74,7 +74,6 @@
     <Compile Include="Script\Direction.cs" />
     <Compile Include="Script\Managers\SceneManager.cs" />
     <Compile Include="Script\Gameplay\Trigger.cs" />
-    <Compile Include="Script\WallJump.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

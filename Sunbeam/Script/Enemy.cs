@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Sunbeam.Script
+namespace Sunbeam
 {
     public class Enemy : LevelReset
     {
