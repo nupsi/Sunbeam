@@ -53,6 +53,7 @@
     <Compile Include="Script\Enemy.cs" />
     <Compile Include="Script\Gameplay\FallingObject.cs" />
     <Compile Include="Script\Gameplay\Triggers\Checkpoint.cs" />
+    <Compile Include="Script\GUI\Dialog.cs" />
     <Compile Include="Script\Managers\GameManager.cs" />
     <Compile Include="Script\Gameplay\Effects\Ice.cs" />
     <Compile Include="Script\Gameplay\Effects\Effect.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="Script\Managers\SceneData.cs" />
     <Compile Include="Script\Player.cs" />
     <Compile Include="Script\Direction.cs" />
-    <Compile Include="Script\SceneManager.cs" />
+    <Compile Include="Script\Managers\SceneManager.cs" />
     <Compile Include="Script\Gameplay\Trigger.cs" />
     <Compile Include="Script\WallJump.cs" />
   </ItemGroup>
