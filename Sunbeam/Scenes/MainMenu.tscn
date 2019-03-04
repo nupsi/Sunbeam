@@ -15,6 +15,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="MainMenuGUI" parent="CanvasLayer" index="0" instance=ExtResource( 2 )]
 
-PlaySceneName = "Level1"
+PlaySceneName = "Level2"
+PlayTestSceneName = "Null"
 
 

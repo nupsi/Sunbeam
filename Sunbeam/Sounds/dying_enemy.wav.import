@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/dying.wav-93872cf5de063a95996bdbc4727e2382.sample"
+path="res://.import/dying_enemy.wav-7a88d477c51e07ad118a56e6fdab025a.sample"
 
 [deps]
 
-source_file="res://Sounds/dying.wav"
-dest_files=[ "res://.import/dying.wav-93872cf5de063a95996bdbc4727e2382.sample" ]
+source_file="res://Sounds/dying_enemy.wav"
+dest_files=[ "res://.import/dying_enemy.wav-7a88d477c51e07ad118a56e6fdab025a.sample" ]
 
 [params]
 

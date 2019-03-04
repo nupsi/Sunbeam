@@ -15,6 +15,15 @@ namespace Sunbeam.Effects
         /// </summary>
         private Vector2 m_previousVelocity;
 
+        protected override void ExitArea(object body)
+        {
+            base.ExitArea(body);
+            if((body as Node)?.GetName() == m_targetName)
+            {
+                m_previousVelocity = new Vector2();
+            }
+        }
+
         protected override void ApplyEffect(float delta)
         {
             var player = (Player)m_target;

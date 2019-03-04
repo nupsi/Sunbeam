@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Godot;
+﻿using Godot;
 
 namespace Sunbeam
 {
@@ -8,9 +7,11 @@ namespace Sunbeam
         [Export]
         public bool Parent;
 
-        private PackedScene m_current;
-        private int m_waitTime = 10;
-        private bool m_cancel;
+        [Export]
+        public string PrefabName;
+
+        private FallingObject m_parent;
+        private Node m_current;
 
         public override void _Ready()
         {
@@ -25,45 +26,46 @@ namespace Sunbeam
         {
             if(!Parent)
             {
-                SetPosition(Position + new Vector2(0, 10 * delta));
+                SetPosition(Position + new Vector2(0, 100 * delta));
             }
-        }
-
-        public override void _ExitTree()
-        {
-            base._ExitTree();
-            m_cancel = true;
         }
 
         protected override void EnterArea(object body)
         {
             base.EnterArea(body);
+            if(!Parent)
+            {
+                if((body as TileMap) != null)
+                {
+                    m_parent.ClearInstance(this);
+                }
+            }
         }
 
-        private void Destroy()
+        public void SetParent(FallingObject parent)
         {
-            this.Dispose();
+            m_parent = parent;
+        }
+
+        public void ClearInstance(Node node)
+        {
+            node.QueueFree();
+            m_current = node;
+            CreateInstance();
         }
 
         private void CreateInstance()
         {
-            m_current = (PackedScene)ResourceLoader.Load(Resource);
-
-            Task.Run(async () =>
-            {
-                while(m_current != null)
-                {
-                    if(m_cancel) return;
-                    await Task.Delay(m_waitTime * 10);
-                    while(Paused) await PauseDelay;
-                }
-                CreateInstance();
-                return;
-            });
+            m_current = LoadPrefab().Instance();
+            ((FallingObject)m_current).SetParent(this);
+            this.AddChild(m_current);
         }
 
-        private string Resource => string.Format("res://Prefabs/{0}.tscn", GetName());
-        private bool Paused => GetTree().Paused;
-        private Task PauseDelay => Task.Delay(10);
+        private PackedScene LoadPrefab()
+        {
+            return (PackedScene)ResourceLoader.Load(Resource);
+        }
+
+        private string Resource => string.Format("res://Prefabs/{0}.tscn", PrefabName);
     }
 }

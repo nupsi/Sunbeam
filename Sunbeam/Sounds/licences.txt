@@ -7,3 +7,5 @@ ambience for the lake level (Designed Ice - Sequences 02/GregorQuendel)
 ambience for the forest level ( WinterSolsticeNight.wav/daveincamas)
 
 ambience for the cave level (Ice Cavern - Sample - WAV/OGsoundFX)
+
+dying sound for enemies (egg crack18.wav/Reitanna) can be used, no copyright

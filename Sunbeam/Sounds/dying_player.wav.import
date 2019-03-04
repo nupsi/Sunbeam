@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/dying_player.wav-2151e48ae03d307273067f8a1f0cdcd6.sample"
+
+[deps]
+
+source_file="res://Sounds/dying_player.wav"
+dest_files=[ "res://.import/dying_player.wav-2151e48ae03d307273067f8a1f0cdcd6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
