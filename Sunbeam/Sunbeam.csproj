@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Data\ActionData.cs" />
+    <Compile Include="Script\Data\IContainer.cs" />
     <Compile Include="Script\Enemy.cs" />
     <Compile Include="Script\Gameplay\FallingObject.cs" />
     <Compile Include="Script\Gameplay\Triggers\Checkpoint.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Script\GUI\MainMenu.cs" />
     <Compile Include="Script\GUI\Menu.cs" />
     <Compile Include="Script\Gameplay\Triggers\LevelEnd.cs" />
+    <Compile Include="Script\Data\IData.cs" />
     <Compile Include="Script\Managers\SceneData.cs" />
     <Compile Include="Script\Player.cs" />
     <Compile Include="Script\Direction.cs" />

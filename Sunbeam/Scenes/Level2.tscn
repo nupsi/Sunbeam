@@ -35,8 +35,6 @@ extents = Vector2( 210, 10 )
 
 [node name="Level2" instance=ExtResource( 1 )]
 
-TrackTime = true
-
 [node name="Game" type="Node" parent="." index="0"]
 
 editor/display_folded = true

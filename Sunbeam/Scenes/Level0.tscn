@@ -37,8 +37,6 @@ extents = Vector2( 239.903, 90 )
 
 [node name="Level0" instance=ExtResource( 1 )]
 
-TrackTime = true
-
 [node name="Background" type="Node" parent="." index="0"]
 
 [node name="Sky_lvl_background" type="Sprite" parent="Background" index="0"]

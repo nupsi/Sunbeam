@@ -1,4 +1,5 @@
 using Godot;
+using Sunbeam.Data;
 using System.Collections.Generic;
 
 namespace Sunbeam
@@ -10,9 +11,9 @@ namespace Sunbeam
         [Export]
         public bool TrackTime;
         public bool Paused;
-
         private float m_time;
         private List<Checkpoint> m_checkpoints;
+        private List<IContainer> m_containers;
         private SceneData m_sceneData;
 
         public override void _EnterTree()
@@ -20,6 +21,7 @@ namespace Sunbeam
             base._EnterTree();
             Instance = this;
             m_checkpoints = new List<Checkpoint>();
+            m_containers = new List<IContainer>();
             m_sceneData = GameManager.Instance.GetSceneData(GetName());
         }
 
@@ -28,6 +30,7 @@ namespace Sunbeam
             m_time = 0;
             Tree.Paused = false;
             MoveToCheckpoint();
+            SetData();
         }
 
         public override void _Process(float delta)
@@ -51,6 +54,36 @@ namespace Sunbeam
                 {
                     var player = (KinematicBody2D)GetNode("Game/Player");
                     player.Position = point.Position;
+                }
+            });
+        }
+
+        public void ReqisterContainer(IContainer data)
+        {
+            m_containers.Add(data);
+        }
+
+        public List<IData> GetData()
+        {
+            var list = new List<IData>();
+            m_containers.ForEach((container) =>
+            {
+                list.Add(container.GetData());
+            });
+            return list;
+        }
+
+        private void SetData()
+        {
+            m_sceneData?.Data.ForEach((data) =>
+            {
+                foreach(var container in m_containers)
+                {
+                    if(data.Name == container.GetName())
+                    {
+                        container.SetData(data);
+                        break;
+                    }
                 }
             });
         }
