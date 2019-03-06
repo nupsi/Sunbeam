@@ -15,8 +15,10 @@
 [ext_resource path="res://Scenes/GUI/GUI_PauseMenu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/GUI/GUI_Cutscene.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GUI/GUI_Dialog.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Sounds/forest_ambience.wav" type="AudioStream" id=16]
+[ext_resource path="res://Audio/Ambient/forest_ambience.wav" type="AudioStream" id=16]
 [ext_resource path="res://Script/Gameplay/Effects/Ice.cs" type="Script" id=17]
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

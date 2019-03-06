@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/level_4_start.wav-ac7ff8c43423943925ab2fe84d3c95f2.sample"
+
+[deps]
+
+source_file="res://Audio/Speech/level_4_start.wav"
+dest_files=[ "res://.import/level_4_start.wav-ac7ff8c43423943925ab2fe84d3c95f2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
