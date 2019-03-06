@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_jump.png-414bfae4fd623fc08123036560e1616e.stex"
+path="res://.import/Sunbeam_walk_1.png-d208509ed0a839772052232b4590b2af.stex"
 
 [deps]
 
-source_file="res://Textures/Player/player_jump.png"
-dest_files=[ "res://.import/player_jump.png-414bfae4fd623fc08123036560e1616e.stex" ]
+source_file="res://Textures/Player/Sunbeam_walk_1.png"
+dest_files=[ "res://.import/Sunbeam_walk_1.png-d208509ed0a839772052232b4590b2af.stex" ]
 
 [params]
 

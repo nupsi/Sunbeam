@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_fall.png-6881653b650f2f13faed0576fc3259b8.stex"
+path="res://.import/Boss.png-184fdc5a92a239c5ddf016db59fe0e26.stex"
 
 [deps]
 
-source_file="res://Textures/Player/player_fall.png"
-dest_files=[ "res://.import/player_fall.png-6881653b650f2f13faed0576fc3259b8.stex" ]
+source_file="res://Textures/Enemies/Boss.png"
+dest_files=[ "res://.import/Boss.png-184fdc5a92a239c5ddf016db59fe0e26.stex" ]
 
 [params]
 

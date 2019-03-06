@@ -159,6 +159,7 @@ namespace Sunbeam
             if(m_sprite.GetAnimation() != animation)
             {
                 m_sprite.SetAnimation(animation);
+                m_sprite.Play();
             }
         }
 
