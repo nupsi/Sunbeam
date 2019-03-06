@@ -1,24 +1,29 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Prefabs/SceneRoot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Textures/white.png" type="Texture" id=2]
 [ext_resource path="res://Prefabs/tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Spikes.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Enemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Prefabs/FallingSnow.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Prefabs/Platform.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Script/Gameplay/Events/DisplayCutscene.cs" type="Script" id=9]
-[ext_resource path="res://Script/Gameplay/Events/DisplayDialog.cs" type="Script" id=10]
-[ext_resource path="res://Script/Gameplay/Triggers/LevelEnd.cs" type="Script" id=11]
-[ext_resource path="res://Script/Gameplay/Triggers/Checkpoint.cs" type="Script" id=12]
-[ext_resource path="res://Scenes/GUI/GUI_PauseMenu.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/GUI/GUI_Cutscene.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/GUI/GUI_Dialog.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Audio/Ambient/forest_ambience.wav" type="AudioStream" id=16]
-[ext_resource path="res://Script/Gameplay/Effects/Ice.cs" type="Script" id=17]
+[ext_resource path="res://Script/Gameplay/Effects/Ice.cs" type="Script" id=6]
+[ext_resource path="res://Prefabs/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/FallingSnow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Prefabs/Platform.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Script/Gameplay/Events/DisplayCutscene.cs" type="Script" id=10]
+[ext_resource path="res://Script/Gameplay/Events/DisplayDialog.cs" type="Script" id=11]
+[ext_resource path="res://Audio/Speech/level_2_start.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/Speech/level_2_end.wav" type="AudioStream" id=13]
+[ext_resource path="res://Script/Gameplay/Triggers/LevelEnd.cs" type="Script" id=14]
+[ext_resource path="res://Script/Gameplay/Triggers/Checkpoint.cs" type="Script" id=15]
+[ext_resource path="res://Scenes/GUI/GUI_PauseMenu.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/GUI/GUI_Cutscene.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/GUI/GUI_Dialog.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Audio/Ambient/forest_ambience.wav" type="AudioStream" id=19]
 
+[sub_resource type="RectangleShape2D" id=3]
 
+custom_solver_bias = 0.0
+extents = Vector2( 210, 10 )
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -30,12 +35,7 @@ extents = Vector2( 50, 50 )
 custom_solver_bias = 0.0
 extents = Vector2( 10, 151.309 )
 
-[sub_resource type="RectangleShape2D" id=3]
-
-custom_solver_bias = 0.0
-extents = Vector2( 210, 10 )
-
-[node name="Level2" instance=ExtResource( 1 )]
+[node name="Level2" index="0" instance=ExtResource( 1 )]
 
 [node name="Game" type="Node" parent="." index="0"]
 
@@ -222,18 +222,38 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 position = Vector2( 1748, 16 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Enemy" parent="Obstacles" index="1" instance=ExtResource( 6 )]
+[node name="Ice" type="Area2D" parent="Obstacles/Spikes" index="18"]
+
+editor/display_folded = true
+position = Vector2( 444.934, 25.2701 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Spikes/Ice" index="0"]
+
+shape = SubResource( 3 )
+
+[node name="Enemy" parent="Obstacles" index="1" instance=ExtResource( 7 )]
 
 position = Vector2( 443.262, 5.14563 )
 Range = 140
 
-[node name="FallingSnow" parent="Obstacles" index="2" instance=ExtResource( 7 )]
+[node name="FallingSnow" parent="Obstacles" index="2" instance=ExtResource( 8 )]
 
 position = Vector2( -113.866, -134.308 )
 scale = Vector2( 1.42077, 0.734926 )
 Parent = true
 
-[node name="FallingSnow2" parent="Obstacles" index="3" instance=ExtResource( 7 )]
+[node name="FallingSnow2" parent="Obstacles" index="3" instance=ExtResource( 8 )]
 
 position = Vector2( 90.9846, -179.538 )
 scale = Vector2( 1.04352, 0.734926 )
@@ -243,57 +263,59 @@ Parent = true
 
 editor/display_folded = true
 
-[node name="Platform" parent="Platforms" index="0" instance=ExtResource( 8 )]
+[node name="Platform" parent="Platforms" index="0" instance=ExtResource( 9 )]
 
 position = Vector2( 920.948, -33.1907 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform2" parent="Platforms" index="1" instance=ExtResource( 8 )]
+[node name="Platform2" parent="Platforms" index="1" instance=ExtResource( 9 )]
 
 position = Vector2( 811.784, -101.914 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform3" parent="Platforms" index="2" instance=ExtResource( 8 )]
+[node name="Platform3" parent="Platforms" index="2" instance=ExtResource( 9 )]
 
 position = Vector2( 926.919, -179.571 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform4" parent="Platforms" index="3" instance=ExtResource( 8 )]
+[node name="Platform4" parent="Platforms" index="3" instance=ExtResource( 9 )]
 
 position = Vector2( 815.894, -273.521 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform5" parent="Platforms" index="4" instance=ExtResource( 8 )]
+[node name="Platform5" parent="Platforms" index="4" instance=ExtResource( 9 )]
 
 position = Vector2( 928.456, -328.605 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform6" parent="Platforms" index="5" instance=ExtResource( 8 )]
+[node name="Platform6" parent="Platforms" index="5" instance=ExtResource( 9 )]
 
 position = Vector2( 1321.95, -29.8777 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform7" parent="Platforms" index="6" instance=ExtResource( 8 )]
+[node name="Platform7" parent="Platforms" index="6" instance=ExtResource( 9 )]
 
 position = Vector2( 1398.24, -95.5563 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform8" parent="Platforms" index="7" instance=ExtResource( 8 )]
+[node name="Platform8" parent="Platforms" index="7" instance=ExtResource( 9 )]
 
 position = Vector2( 1512.35, -167.869 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform9" parent="Platforms" index="8" instance=ExtResource( 8 )]
+[node name="Platform9" parent="Platforms" index="8" instance=ExtResource( 9 )]
 
 position = Vector2( 1588.64, -224.26 )
 scale = Vector2( 1.38804, 0.2923 )
 
-[node name="Platform10" parent="Platforms" index="9" instance=ExtResource( 8 )]
+[node name="Platform10" parent="Platforms" index="9" instance=ExtResource( 9 )]
 
 position = Vector2( 1674.89, -264.065 )
 scale = Vector2( 1.38804, 0.2923 )
 
 [node name="Triggers" type="Node" parent="." index="3"]
+
+editor/display_folded = true
 
 [node name="Start Cutscene" type="Area2D" parent="Triggers" index="0"]
 
@@ -306,7 +328,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -327,7 +349,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -335,6 +357,7 @@ Text = "Branches of the trees hanged low under the snow. It blanketed the woods 
 white coat, that had put all of nature into warm, silent sleep. Sharp icicles hang from the branches
 and once in a while snow crunched somewhere in the distance. It was a peaceful place but very,
 very lonely one."
+Audio = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Start Dialog" index="0"]
 
@@ -342,6 +365,7 @@ shape = SubResource( 1 )
 
 [node name="End Dialog" type="Area2D" parent="Triggers" index="2"]
 
+editor/display_folded = true
 position = Vector2( 2102.29, -15.3667 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -350,7 +374,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -358,6 +382,7 @@ Text = "Light grew. Soon the snow would fall from the trees and the nature would
 new day. This place would be full of life, after a long, long sleep. Yet still, the winter persisted.
 Sunbeam had to fight it back on every step. How could he let this continue? Sunbeam walked
 towards the mountains."
+Audio = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/End Dialog" index="0"]
 
@@ -374,7 +399,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 11 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -386,6 +411,7 @@ shape = SubResource( 1 )
 
 [node name="Checkpoint" type="Area2D" parent="Triggers" index="4"]
 
+editor/display_folded = true
 position = Vector2( 1093.88, -0.380642 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -394,7 +420,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 12 )
+script = ExtResource( 15 )
 CheckpointIndex = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Checkpoint" index="0"]
@@ -405,6 +431,8 @@ shape = SubResource( 2 )
 
 [node name="GUI" type="Node" parent="." index="4"]
 
+editor/display_folded = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="GUI" index="0"]
 
 layer = 128
@@ -413,7 +441,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="PauseMenuGUI" parent="GUI/CanvasLayer" index="0" instance=ExtResource( 13 )]
+[node name="PauseMenuGUI" parent="GUI/CanvasLayer" index="0" instance=ExtResource( 16 )]
 
 visible = false
 
@@ -425,7 +453,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="CutsceneGUI" parent="GUI/CanvasLayer2" index="0" instance=ExtResource( 14 )]
+[node name="CutsceneGUI" parent="GUI/CanvasLayer2" index="0" instance=ExtResource( 17 )]
 
 visible = false
 margin_left = -2.0
@@ -433,7 +461,7 @@ margin_top = 1.0
 margin_right = -2.0
 margin_bottom = 1.0
 
-[node name="DialogGUI" parent="GUI/CanvasLayer2" index="1" instance=ExtResource( 15 )]
+[node name="DialogGUI" parent="GUI/CanvasLayer2" index="1" instance=ExtResource( 18 )]
 
 [node name="Audio" type="Node" parent="." index="5"]
 
@@ -441,30 +469,11 @@ editor/display_folded = true
 
 [node name="Ambience" type="AudioStreamPlayer" parent="Audio" index="0"]
 
-stream = ExtResource( 16 )
+stream = ExtResource( 19 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = true
 mix_target = 0
 bus = "Master"
-
-[node name="Area2D" type="Area2D" parent="." index="6"]
-
-position = Vector2( 444.934, 25.2701 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 17 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-
-shape = SubResource( 3 )
 
 

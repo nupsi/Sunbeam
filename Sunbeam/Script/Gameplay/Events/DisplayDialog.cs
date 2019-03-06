@@ -9,7 +9,11 @@ namespace Sunbeam.Events
         [Export]
         public string Text;
 
+        [Export]
+        public AudioStream Audio;
+
         private ActionData m_action;
+        private bool m_inside;
 
         public override void _EnterTree()
         {
@@ -18,11 +22,29 @@ namespace Sunbeam.Events
             SceneManager.Instance.ReqisterContainer(this);
         }
 
+        protected override void EnterArea(object body)
+        {
+            base.EnterArea(body);
+            if(IsTarget(body))
+            {
+                m_inside = true;
+            }
+        }
+
+        protected override void ExitArea(object body)
+        {
+            base.ExitArea(body);
+            if(IsTarget(body))
+            {
+                m_inside = false;
+            }
+        }
+
         protected override void TriggerEvent()
         {
             if(!m_action.Completed)
             {
-                Dialog.Instance.ShowDialog(Text);
+                Dialog.Instance.ShowDialog(Text, Audio);
                 m_action.Completed = true;
             }
         }

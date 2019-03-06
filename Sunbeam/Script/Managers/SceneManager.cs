@@ -102,18 +102,13 @@ namespace Sunbeam
             Tree.ChangeScene(GetScene(name));
         }
 
+        /// <summary>
+        /// Reload scene without deleting saved data.
+        /// Use GameManager.Instance.ResetSceneData() to erase saved data.
+        /// </summary>
         public void Reload()
         {
             Tree.ReloadCurrentScene();
-        }
-
-        private void RealoadScene(object body)
-        {
-            var node = (Node)body;
-            if(node.GetName() == "Player")
-            {
-                Reload();
-            }
         }
 
         public static string GetScene(string _name)

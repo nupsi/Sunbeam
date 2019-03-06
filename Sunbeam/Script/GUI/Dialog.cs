@@ -7,6 +7,7 @@ namespace Sunbeam.UI
         public static Dialog Instance;
         private static string Color = "font_color";
 
+        private AudioStreamPlayer m_audioStream;
         private Tween.TransitionType transition = Tween.TransitionType.Linear;
         private Tween.EaseType ease = Tween.EaseType.In;
         private float m_topBarSize = 80;
@@ -18,6 +19,7 @@ namespace Sunbeam.UI
         private Label m_label;
         private Label m_hint;
         private Tween m_tween;
+        private bool m_hasAudio;
 
         public override void _Ready()
         {
@@ -27,6 +29,7 @@ namespace Sunbeam.UI
             m_top = (Panel)GetNode("Top");
             m_bottom = (Panel)GetNode("Bottom");
             m_tween = (Tween)GetNode("Tween");
+            m_audioStream = (AudioStreamPlayer)GetNode("Audio");
             m_tween.Connect("tween_completed", this, "TweenCompleted");
             m_label = (Label)GetNode("Label");
             m_label.MarginTop = -m_bottomBarSize;
@@ -56,6 +59,16 @@ namespace Sunbeam.UI
                 if(color.a >= 1) m_alpha = -1;
                 FontColor = color;
             }
+        }
+
+        public void ShowDialog(string text, AudioStream audio)
+        {
+            m_hasAudio = (audio != null);
+            if(m_hasAudio)
+            {
+                m_audioStream.SetStream(audio);
+            }
+            ShowDialog(text);
         }
 
         public void ShowDialog(string text)
@@ -93,6 +106,18 @@ namespace Sunbeam.UI
 
         private void SetLabelsVisible(bool visible)
         {
+            if(m_hasAudio)
+            {
+                if(visible)
+                {
+                    m_audioStream.Play();
+                }
+                else
+                {
+                    m_audioStream.Stop();
+                }
+            }
+            
             m_hint.Visible = visible;
             m_label.Visible = visible;
         }

@@ -19,6 +19,11 @@ namespace Sunbeam
             }
         }
 
+        protected bool IsTarget(object body)
+        {
+            return (body as Node)?.GetName() == m_targetName;
+        }
+
         protected abstract void EnterArea(object body);
         protected abstract void ExitArea(object body);
         protected abstract bool ListenEnter { get; }

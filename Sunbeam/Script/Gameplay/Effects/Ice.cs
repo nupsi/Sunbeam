@@ -18,7 +18,7 @@ namespace Sunbeam.Effects
         protected override void ExitArea(object body)
         {
             base.ExitArea(body);
-            if((body as Node)?.GetName() == m_targetName)
+            if(IsTarget(body))
             {
                 m_previousVelocity = new Vector2();
             }

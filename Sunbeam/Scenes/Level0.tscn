@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Prefabs/SceneRoot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Textures/Graphics/Sky_lvl_background.png" type="Texture" id=2]
@@ -11,9 +11,11 @@
 [ext_resource path="res://Prefabs/Platform.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Script/Gameplay/Events/DisplayCutscene.cs" type="Script" id=10]
 [ext_resource path="res://Script/Gameplay/Events/DisplayDialog.cs" type="Script" id=11]
-[ext_resource path="res://Script/Gameplay/Triggers/LevelEnd.cs" type="Script" id=12]
-[ext_resource path="res://Script/Gameplay/Effects/Ice.cs" type="Script" id=13]
-[ext_resource path="res://Script/Gameplay/Effects/Wind.cs" type="Script" id=14]
+[ext_resource path="res://Audio/Speech/level_0_start.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/Speech/level_0_end.wav" type="AudioStream" id=13]
+[ext_resource path="res://Script/Gameplay/Triggers/LevelEnd.cs" type="Script" id=14]
+[ext_resource path="res://Script/Gameplay/Effects/Ice.cs" type="Script" id=15]
+[ext_resource path="res://Script/Gameplay/Effects/Wind.cs" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -150,6 +152,7 @@ max_lines_visible = -1
 
 [node name="Start Cutscene" type="Area2D" parent="Triggers" index="0"]
 
+editor/display_folded = true
 position = Vector2( -91.2046, 30.4393 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -171,7 +174,7 @@ shape = SubResource( 1 )
 [node name="Start Dialog" type="Area2D" parent="Triggers" index="1"]
 
 editor/display_folded = true
-position = Vector2( 52.7632, 29.1765 )
+position = Vector2( 52.7632, 29.8067 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -187,6 +190,7 @@ Text = "Sunbeam awoke. It stood atop the clouds and felt the warmth spread troug
 filling its being. It had waited this for so long! Now it was its time to run through the waking land
 and bring summers light to all. Sunbeam stood on the edge, looked down below and beamed with
 pride. It was time to descent."
+Audio = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Start Dialog" index="0"]
 
@@ -211,6 +215,7 @@ __meta__ = {
 Text = "Here the little sunbeam finally was, on earth. But something was not right. Cold winds
 still blew and snow blanketed all. Winter lingered still. Sunbeam looked upon the frozen world,
 shivered and pondered. Why was he still here?"
+Audio = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/End Dialog" index="0"]
 
@@ -227,7 +232,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 12 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -251,7 +256,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 13 )
+script = ExtResource( 15 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -270,7 +275,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 14 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_group_": true
 }
