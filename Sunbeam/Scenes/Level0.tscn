@@ -1,18 +1,19 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Prefabs/SceneRoot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Textures/Graphics/Sky_lvl_background.png" type="Texture" id=2]
 [ext_resource path="res://Textures/white.png" type="Texture" id=3]
-[ext_resource path="res://Prefabs/cloud_tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Platform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Script/Gameplay/Events/DisplayCutscene.cs" type="Script" id=7]
-[ext_resource path="res://Script/Gameplay/Events/DisplayDialog.cs" type="Script" id=8]
-[ext_resource path="res://Audio/Speech/level_0_start.wav" type="AudioStream" id=9]
-[ext_resource path="res://Audio/Speech/level_0_end.wav" type="AudioStream" id=10]
-[ext_resource path="res://Script/Gameplay/Triggers/LevelEnd.cs" type="Script" id=11]
-[ext_resource path="res://Script/Gameplay/Effects/Wind.cs" type="Script" id=12]
-[ext_resource path="res://Scenes/GUI/GUI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Textures/Graphics/tutorial.png" type="Texture" id=4]
+[ext_resource path="res://Prefabs/cloud_tileset.tres" type="TileSet" id=5]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Prefabs/Platform.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Script/Gameplay/Events/DisplayCutscene.cs" type="Script" id=8]
+[ext_resource path="res://Script/Gameplay/Events/DisplayDialog.cs" type="Script" id=9]
+[ext_resource path="res://Audio/Speech/level_0_start.wav" type="AudioStream" id=10]
+[ext_resource path="res://Audio/Speech/level_0_end.wav" type="AudioStream" id=11]
+[ext_resource path="res://Script/Gameplay/Triggers/LevelEnd.cs" type="Script" id=12]
+[ext_resource path="res://Script/Gameplay/Effects/Wind.cs" type="Script" id=13]
+[ext_resource path="res://Scenes/GUI/GUI.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -29,7 +30,7 @@ extents = Vector2( 20, 20 )
 custom_solver_bias = 0.0
 extents = Vector2( 239.903, 90 )
 
-[node name="Level0" instance=ExtResource( 1 )]
+[node name="Level0" index="0" instance=ExtResource( 1 )]
 
 [node name="Background" type="Node" parent="." index="0"]
 
@@ -49,10 +50,16 @@ scale = Vector2( 15.6441, 6.33289 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="TileMap" type="TileMap" parent="Game" index="1"]
+[node name="tutorial" type="Sprite" parent="Game" index="1"]
+
+position = Vector2( 964.617, -141.562 )
+scale = Vector2( 0.706435, 0.76836 )
+texture = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="Game" index="2"]
 
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 5 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -73,21 +80,21 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="Game" index="2" instance=ExtResource( 5 )]
+[node name="Player" parent="Game" index="3" instance=ExtResource( 6 )]
 
 position = Vector2( -83.6851, 43.4667 )
 
-[node name="Platform" parent="Game" index="3" instance=ExtResource( 6 )]
+[node name="Platform" parent="Game" index="4" instance=ExtResource( 7 )]
 
 position = Vector2( 1618.29, -75.2768 )
 scale = Vector2( 2.105, 0.467249 )
 
-[node name="Platform3" parent="Game" index="4" instance=ExtResource( 6 )]
+[node name="Platform3" parent="Game" index="5" instance=ExtResource( 7 )]
 
 position = Vector2( 1680.38, -228.259 )
 scale = Vector2( 2.105, 0.467249 )
 
-[node name="Platform4" parent="Game" index="5" instance=ExtResource( 6 )]
+[node name="Platform4" parent="Game" index="6" instance=ExtResource( 7 )]
 
 position = Vector2( 1813.87, -297.88 )
 scale = Vector2( 2.105, 0.467249 )
@@ -105,7 +112,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -126,15 +133,15 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
 }
-Text = "Sunbeam awoke. It stood atop the clouds and felt the warmth spread trough it,
+Text = "Sunbeam awoke. It stood atop the clouds and felt the warmth spread through it,
 filling its being. It had waited this for so long! Now it was its time to run through the waking land
 and bring summers light to all. Sunbeam stood on the edge, looked down below and beamed with
 pride. It was time to descent."
-Audio = ExtResource( 9 )
+Audio = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Start Dialog" index="0"]
 
@@ -152,14 +159,14 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
 }
 Text = "Here the little sunbeam finally was, on earth. But something was not right. Cold winds
 still blew and snow blanketed all. Winter lingered still. Sunbeam looked upon the frozen world,
 shivered and pondered. Why was he still here?"
-Audio = ExtResource( 10 )
+Audio = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/End Dialog" index="0"]
 
@@ -176,7 +183,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -198,7 +205,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -209,6 +216,29 @@ Strength = 100
 
 shape = SubResource( 3 )
 
-[node name="GUI" parent="." index="4" instance=ExtResource( 13 )]
+[node name="GUI" parent="." index="4" instance=ExtResource( 14 )]
+
+[node name="Start Dialog2" type="Area2D" parent="." index="5"]
+
+editor/display_folded = true
+position = Vector2( 822.456, 74.6451 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+Text = "You can hold space to Jump automatically when hitting a wall,
+but you need to change the movement direction yourself"
+Audio = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Start Dialog2" index="0"]
+
+shape = SubResource( 1 )
 
 

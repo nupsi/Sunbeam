@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/GUI/GUI_MainMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Textures/Graphics/Sky_lvl_background.png" type="Texture" id=3]
 
-[node name="Scene" instance=ExtResource( 1 )]
+[node name="Scene" index="0" instance=ExtResource( 1 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
