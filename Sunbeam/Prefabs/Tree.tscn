@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Textures/Graphics/tree_trunk.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Graphics/tree_branch.png" type="Texture" id=2]
+
+[node name="Tree" type="Sprite"]
+
+position = Vector2( -0.27644, -112.684 )
+scale = Vector2( 0.394122, 0.394122 )
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 62.9396, 110.848 )
+rotation = -0.406215
+scale = Vector2( 0.496347, 0.496347 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="." index="1"]
+
+position = Vector2( 103.741, -189.464 )
+rotation = -0.406215
+scale = Vector2( 0.960511, 0.960511 )
+texture = ExtResource( 2 )
+
+[node name="Sprite7" type="Sprite" parent="." index="2"]
+
+position = Vector2( 139.395, -38.6863 )
+rotation = -0.230959
+scale = Vector2( 1.28619, 1.28619 )
+texture = ExtResource( 2 )
+
+[node name="Sprite5" type="Sprite" parent="." index="3"]
+
+position = Vector2( 90.8097, -64.5586 )
+rotation = 1.43999
+scale = Vector2( -0.465237, 0.451205 )
+texture = ExtResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="." index="4"]
+
+position = Vector2( -85.9192, -124.268 )
+rotation = 1.12776
+scale = Vector2( -0.960511, -0.960511 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite6" type="Sprite" parent="." index="5"]
+
+position = Vector2( -55.3945, 15.5558 )
+rotation = 1.12776
+scale = Vector2( -0.521064, -0.521064 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite4" type="Sprite" parent="." index="6"]
+
+position = Vector2( -100.66, -80.0629 )
+rotation = 0.485887
+scale = Vector2( -0.447377, -0.447377 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+

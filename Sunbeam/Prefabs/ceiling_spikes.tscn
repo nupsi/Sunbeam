@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Script/Gameplay/Triggers/LevelReset.cs" type="Script" id=1]
+[ext_resource path="res://Textures/Graphics/cave_ceiling_spikes.png" type="Texture" id=2]
+
+[node name="ceiling_spikes" type="Area2D"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 0.430258, 0 )
+scale = Vector2( 0.139482, 0.139482 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 1
+polygon = PoolVector2Array( -20.0693, -14.4671, -13.1634, 14.3499, -10.8614, 8.46716, -10.7762, 9.23447, -7.62164, 3.09593, -3.35876, 7.69984, 1.67143, -1.6785, 8.66256, 10.6839, 8.74782, -7.73178, 13.6928, -2.8721, 18.2967, 4.71582, 20.5134, 1.135, 21.5365, -14.4671 )
+_sections_unfolded = [ "Transform" ]
+
+

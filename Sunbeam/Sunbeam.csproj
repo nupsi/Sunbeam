@@ -50,7 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Data\ActionData.cs" />
+    <Compile Include="Script\Data\IContainer.cs" />
+    <Compile Include="Script\Enemy.cs" />
+    <Compile Include="Script\Gameplay\FallingObject.cs" />
     <Compile Include="Script\Gameplay\Triggers\Checkpoint.cs" />
+    <Compile Include="Script\GUI\Credits.cs" />
+    <Compile Include="Script\GUI\Dialog.cs" />
     <Compile Include="Script\Managers\GameManager.cs" />
     <Compile Include="Script\Gameplay\Effects\Ice.cs" />
     <Compile Include="Script\Gameplay\Effects\Effect.cs" />
@@ -66,10 +72,11 @@
     <Compile Include="Script\GUI\MainMenu.cs" />
     <Compile Include="Script\GUI\Menu.cs" />
     <Compile Include="Script\Gameplay\Triggers\LevelEnd.cs" />
+    <Compile Include="Script\Data\IData.cs" />
     <Compile Include="Script\Managers\SceneData.cs" />
     <Compile Include="Script\Player.cs" />
     <Compile Include="Script\Direction.cs" />
-    <Compile Include="Script\SceneManager.cs" />
+    <Compile Include="Script\Managers\SceneManager.cs" />
     <Compile Include="Script\Gameplay\Trigger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

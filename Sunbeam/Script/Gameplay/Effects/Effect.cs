@@ -23,7 +23,7 @@ namespace Sunbeam.Effects
 
         protected override void EnterArea(object body)
         {
-            if((body as Node)?.GetName() == m_targetName)
+            if(IsTarget(body))
             {
                 m_target = (Node)body;
             }
@@ -31,7 +31,7 @@ namespace Sunbeam.Effects
 
         protected override void ExitArea(object body)
         {
-            if((body as Node)?.GetName() == m_targetName)
+            if(IsTarget(body))
             {
                 m_target = null;
             }

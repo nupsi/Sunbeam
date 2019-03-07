@@ -6,8 +6,7 @@ namespace Sunbeam
     {
         protected override void EnterArea(object body)
         {
-            var node = (Node)body;
-            if(node.GetName() == m_targetName)
+            if(IsTarget(body))
             {
                 SceneManager.Instance.Reload();
             }

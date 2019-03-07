@@ -15,6 +15,16 @@
             m_sceneData.CheckPoint = index;
         }
 
+        public void UpdateData()
+        {
+            m_sceneData.Data = SceneManager.Instance.GetData();
+        }
+
+        public void ResetSceneData()
+        {
+            m_sceneData.Name = string.Empty;
+        }
+
         public SceneData GetSceneData(string name)
         {
             return (m_sceneData.Name == name)

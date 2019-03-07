@@ -1,12 +1,10 @@
-﻿using Godot;
-
-namespace Sunbeam.Events
+﻿namespace Sunbeam.Events
 {
     public abstract class Event : Trigger
     {
         protected override void EnterArea(object body)
         {
-            if((body as Node)?.GetName() == m_targetName)
+            if(IsTarget(body))
             {
                 TriggerEvent();
             }
@@ -16,7 +14,7 @@ namespace Sunbeam.Events
         {
             if(ListenExit)
             {
-                if((body as Node)?.GetName() == m_targetName)
+                if(IsTarget(body))
                 {
                     ExitEvent();
                 }

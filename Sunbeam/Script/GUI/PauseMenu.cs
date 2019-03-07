@@ -4,32 +4,45 @@ namespace Sunbeam.UI
 {
     public class PauseMenu : Menu
     {
+        private bool m_returnState;
+
         public override void _Ready()
         {
             SetProcessInput(true);
-            TogglePause(false);
+            TogglePause(false, false);
         }
 
         public override void _Input(InputEvent @event)
         {
             if(Escape)
             {
-                TogglePause(!GetTree().Paused);
+                if(!Visible)
+                {
+                    m_returnState = GetTree().Paused;
+                    Pause();
+                }
+                else
+                {
+                    Continue();
+                }
             }
         }
 
         public void Pause()
         {
-            TogglePause(true);
+            TogglePause(true, true);
+            SceneManager.Paused = true;
         }
 
         public void Continue()
         {
-            TogglePause(false);
+            TogglePause(false, m_returnState);
+            SceneManager.Paused = false;
         }
 
         public void Restart()
         {
+            GameManager.Instance.ResetSceneData();
             SceneManager.Reload();
         }
 
@@ -38,10 +51,10 @@ namespace Sunbeam.UI
             SceneManager.ChangeScene("MainMenu");
         }
 
-        private void TogglePause(bool paused)
+        private void TogglePause(bool visible, bool paused)
         {
             GetTree().Paused = paused;
-            Visible = paused;
+            Visible = visible;
         }
 
         private bool Escape => Input.IsActionJustPressed("ui_cancel");

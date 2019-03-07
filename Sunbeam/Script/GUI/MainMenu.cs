@@ -7,17 +7,9 @@ namespace Sunbeam.UI
         [Export]
         public string PlaySceneName;
 
-        [Export]
-        public string PlayTestSceneName;
-
         private void Play()
         {
             SceneManager.ChangeScene(PlaySceneName);
-        }
-
-        private void PlayTest()
-        {
-            SceneManager.ChangeScene(PlayTestSceneName);
         }
     }
 }

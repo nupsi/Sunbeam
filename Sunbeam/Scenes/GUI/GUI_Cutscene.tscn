@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Script/GUI/Cutscene.cs" type="Script" id=1]
+[ext_resource path="res://Fonts/opendyslexic_title.tres" type="DynamicFont" id=2]
 
 [node name="CutsceneGUI" type="Control"]
 
@@ -15,6 +16,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Margin" ]
 
 [node name="Top" type="Panel" parent="." index="0"]
 
@@ -38,13 +40,14 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 10.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Margin", "Visibility" ]
 
 [node name="Label" type="Label" parent="." index="2"]
 
@@ -59,6 +62,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 5
 text = "Sample Text"
@@ -67,7 +71,7 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Pause" ]
+_sections_unfolded = [ "Pause", "custom_fonts" ]
 
 [node name="Tween" type="Tween" parent="." index="3"]
 
