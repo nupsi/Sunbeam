@@ -35,17 +35,17 @@ extents = Vector2( 239.903, 90 )
 
 [node name="Sky_lvl_background" type="Sprite" parent="Background" index="0"]
 
-position = Vector2( 1360.92, 24.4758 )
-scale = Vector2( 3.57121, 2.06014 )
+position = Vector2( 1359.94, -171.599 )
+scale = Vector2( 3.1953, 1.60095 )
 texture = ExtResource( 2 )
 
 [node name="Game" type="Node" parent="." index="1"]
 
 [node name="Wind" type="Sprite" parent="Game" index="0"]
 
-modulate = Color( 0.652344, 0.652344, 0.652344, 1 )
-position = Vector2( 2693.62, 150.382 )
-scale = Vector2( 16.2984, 6.33289 )
+modulate = Color( 0.652344, 0.652344, 0.652344, 0.149176 )
+position = Vector2( 2704.09, 150.382 )
+scale = Vector2( 15.6441, 6.33289 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Visibility" ]
 

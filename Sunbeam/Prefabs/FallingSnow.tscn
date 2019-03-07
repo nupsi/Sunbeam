@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Script/Gameplay/FallingObject.cs" type="Script" id=1]
-[ext_resource path="res://Textures/white.png" type="Texture" id=2]
+[ext_resource path="res://Textures/Graphics/snow.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -22,12 +22,14 @@ _sections_unfolded = [ "Pause" ]
 Parent = false
 PrefabName = "FallingSnow"
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+position = Vector2( 0.00813708, 0.0364955 )
+scale = Vector2( 0.318923, 0.318923 )
+texture = ExtResource( 2 )
 
 

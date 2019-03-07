@@ -53,8 +53,8 @@ extents = Vector2( 10, 100 )
 
 [node name="Sky_lvl_background" type="Sprite" parent="Background" index="0"]
 
-position = Vector2( 944.228, -389.397 )
-scale = Vector2( 2.60016, 1.36349 )
+position = Vector2( 896.612, -389.8 )
+scale = Vector2( 1.88499, 1.36255 )
 texture = ExtResource( 2 )
 
 [node name="Obstacles" type="Node" parent="." index="1"]

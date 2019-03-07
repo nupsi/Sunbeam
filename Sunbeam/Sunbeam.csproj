@@ -55,6 +55,7 @@
     <Compile Include="Script\Enemy.cs" />
     <Compile Include="Script\Gameplay\FallingObject.cs" />
     <Compile Include="Script\Gameplay\Triggers\Checkpoint.cs" />
+    <Compile Include="Script\GUI\Credits.cs" />
     <Compile Include="Script\GUI\Dialog.cs" />
     <Compile Include="Script\Managers\GameManager.cs" />
     <Compile Include="Script\Gameplay\Effects\Ice.cs" />

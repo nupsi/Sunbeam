@@ -11,7 +11,7 @@ namespace Sunbeam.UI
         private Tween.TransitionType transition = Tween.TransitionType.Linear;
         private Tween.EaseType ease = Tween.EaseType.In;
         private float m_topBarSize = 80;
-        private float m_bottomBarSize = 140;
+        private float m_bottomBarSize = 155;
         private float time = 0.5f;
         private float m_alpha;
         private Panel m_top;
